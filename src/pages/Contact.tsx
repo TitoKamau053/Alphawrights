@@ -20,8 +20,21 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Here you would normally send the form data to your backend
-    // For now, we'll show a success message
+    const { name, email, phone, message } = formData;
+    
+    // WhatsApp message
+    const whatsappMessage = `Name: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
+    const whatsappUrl = `https://wa.me/254700000000?text=${whatsappMessage}`;
+    
+    // Email message
+    const emailSubject = encodeURIComponent(`Enquiry from ${name}`);
+    const emailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`);
+    const emailUrl = `mailto:info@alphawrights.com?subject=${emailSubject}&body=${emailBody}`;
+    
+    // Open both
+    window.open(whatsappUrl, '_blank');
+    window.open(emailUrl, '_blank');
+    
     toast({
       title: "Message Sent!",
       description: "We'll get back to you as soon as possible.",

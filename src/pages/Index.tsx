@@ -28,10 +28,10 @@ const Index = () => {
             Bringing your vision to life with expert craftsmanship. From concept to creation, we deliver premium custom fabrications.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild variant="hero" size="xl">
-              <Link to="/contact">Book Consultation</Link>
+            <Button asChild variant="hero" size="xl" className="animate-on-hover">
+              <Link to="/contact">Send Enquiry</Link>
             </Button>
-            <Button asChild variant="secondary" size="xl">
+            <Button asChild variant="secondary" size="xl" className="animate-on-hover">
               <Link to="/services">View Our Work</Link>
             </Button>
           </div>
@@ -48,24 +48,30 @@ const Index = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <ServiceCard
-            title="Steel Welding"
-            description="Custom steel fabrication and welding services for industrial and residential projects."
-            image={weldingImage}
-            link="/services"
-          />
-          <ServiceCard
-            title="Wood Furniture"
-            description="Live edge wood slabs, epoxy resin tables, and custom wood furnishings."
-            image={woodworkImage}
-            link="/services"
-          />
-          <ServiceCard
-            title="Custom Designs"
-            description="Unique metal and wood combinations tailored to your specific vision and requirements."
-            image={customImage}
-            link="/services"
-          />
+          <div className="fade-in-up" style={{ animationDelay: '0.1s' }}>
+            <ServiceCard
+              title="Steel Welding"
+              description="Custom steel fabrication and welding services for industrial and residential projects."
+              image={weldingImage}
+              link="/services"
+            />
+          </div>
+          <div className="fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <ServiceCard
+              title="Wood Furniture"
+              description="Live edge wood slabs, epoxy resin tables, and custom wood furnishings."
+              image={woodworkImage}
+              link="/services"
+            />
+          </div>
+          <div className="fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <ServiceCard
+              title="Custom Designs"
+              description="Unique metal and wood combinations tailored to your specific vision and requirements."
+              image={customImage}
+              link="/services"
+            />
+          </div>
         </div>
       </section>
 
@@ -116,13 +122,22 @@ const Index = () => {
       {/* CTA Section */}
       <section className="section-container">
         <div className="bg-primary text-primary-foreground p-12 md:p-16 text-center rounded-none">
-          <h2 className="text-background mb-4">Ready to Start Your Project?</h2>
-          <p className="text-background/80 text-lg mb-8 max-w-2xl mx-auto">
+          <h2 className="text-primary-foreground mb-4">Ready to Start Your Project?</h2>
+          <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
             Let's discuss your custom fabrication needs and bring your vision to life.
           </p>
-          <Button asChild variant="hero" size="xl">
-            <Link to="/contact">Get In Touch</Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button asChild variant="outline" size="xl" className="animate-on-hover bg-primary-foreground text-primary hover:bg-primary-foreground/90">
+              <Link to="/contact">Send Enquiry</Link>
+            </Button>
+            <a
+              href="/portfolio.pdf"
+              download="AlphaWrights-Portfolio.pdf"
+              className="inline-flex items-center justify-center gap-2 h-14 px-12 text-lg font-semibold text-primary-foreground border-2 border-primary-foreground hover:bg-primary-foreground/10 transition-all duration-300 animate-on-hover"
+            >
+              Download Portfolio
+            </a>
+          </div>
         </div>
       </section>
 
