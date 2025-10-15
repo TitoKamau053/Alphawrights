@@ -4,33 +4,40 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// Placeholder categories - these should match your Google Drive folders
+import weldingImage from "@/assets/service-welding.jpg";
+import woodworkImage from "@/assets/service-woodwork.jpg";
+import customImage from "@/assets/service-custom.jpg";
+import heroImage from "@/assets/hero-fabrication.jpg";
+import workshopHero from "@/assets/workshop-hero.jpg";
+import logo from "@/assets/alpha-wrights-logo.jpg";
+
+// Gallery categories with existing images
 const categories = [
   {
     id: "metal-works",
     name: "Metal Works",
     images: [
-      { id: 1, src: "/placeholder.svg", alt: "Metal fabrication 1" },
-      { id: 2, src: "/placeholder.svg", alt: "Metal fabrication 2" },
-      { id: 3, src: "/placeholder.svg", alt: "Metal fabrication 3" },
+      { id: 1, src: weldingImage, alt: "Steel welding and metal fabrication" },
+      { id: 2, src: heroImage, alt: "Custom fabrication workshop" },
+      { id: 3, src: workshopHero, alt: "Workshop interior and equipment" },
     ],
   },
   {
     id: "wood-works",
     name: "Wood Works",
     images: [
-      { id: 4, src: "/placeholder.svg", alt: "Wood furniture 1" },
-      { id: 5, src: "/placeholder.svg", alt: "Wood furniture 2" },
-      { id: 6, src: "/placeholder.svg", alt: "Wood furniture 3" },
+      { id: 4, src: woodworkImage, alt: "Wood furniture and custom woodwork" },
+      { id: 5, src: customImage, alt: "Custom metal and wood combinations" },
+      { id: 6, src: logo, alt: "Alpha Wrights branding" },
     ],
   },
   {
     id: "custom-projects",
     name: "Custom Projects",
     images: [
-      { id: 7, src: "/placeholder.svg", alt: "Custom project 1" },
-      { id: 8, src: "/placeholder.svg", alt: "Custom project 2" },
-      { id: 9, src: "/placeholder.svg", alt: "Custom project 3" },
+      { id: 7, src: customImage, alt: "Custom project showcase" },
+      { id: 8, src: weldingImage, alt: "Metal fabrication project" },
+      { id: 9, src: woodworkImage, alt: "Woodworking project" },
     ],
   },
 ];
