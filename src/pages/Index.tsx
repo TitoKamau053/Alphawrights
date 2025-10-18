@@ -38,10 +38,10 @@ const Index = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild className="bg-white text-black px-10 py-4 tracking-widest text-sm font-bold uppercase hover:bg-gray-200 transition border-2 border-white">
-              <Link to="/gallery">View Portfolio</Link>
+              <Link to="/gallery">View our works</Link>
             </Button>
             <Button asChild className="bg-transparent text-white px-10 py-4 tracking-widest text-sm font-bold uppercase hover:bg-white hover:text-black transition border-2 border-white">
-              <Link to="/contact">Book Consultation</Link>
+              <Link to="/contact">Reach us out </Link>
             </Button>
           </div>
         </div>
@@ -51,17 +51,12 @@ const Index = () => {
       <section className="py-12 px-4 bg-gray-50">
         <div className="container mx-auto max-w-5xl">
           <div className="border-2 border-black p-8 bg-white text-center">
-            <h2 className="text-2xl md:text-3xl tracking-[0.2em] uppercase font-bold mb-6">Our Fabrication Services</h2>
+            <h2 className="text-2xl md:text-3xl tracking-[0.2em] uppercase font-bold mb-6">Our Services</h2>
             <div className="text-sm md:text-base flex flex-wrap justify-center gap-x-3 gap-y-2">
-              <span className="font-semibold">Custom Steel Fabrications</span> |
-              <span className="font-semibold">Custom Wood Fabrications</span> |
-              <span className="font-semibold">Metal Gates & Doors</span> |
-              <span className="font-semibold">Furniture Design</span> |
-              <span className="font-semibold">Welding Services</span> |
-              <span className="font-semibold">Staircases & Railings</span> |
-              <span className="font-semibold">Custom Tables</span> |
-              <span className="font-semibold">Wood Panels</span> |
-              <span className="font-semibold">Metal Structures</span>
+              <span className="font-semibold">Custom Steel Works</span> |
+              <span className="font-semibold">Furnitures</span> |
+              <span className="font-semibold">Home Pictures</span> |
+              <span className="font-semibold">Integrated Steel and Wood Works</span>
             </div>
           </div>
         </div>
@@ -213,7 +208,6 @@ const Index = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-8 border-2 border-black">
-              <div className="text-5xl mb-4">🎯</div>
               <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">Custom-Built</h3>
               <p className="text-gray-700">
                 Every project is tailored to your specific requirements. We don't do cookie-cutter solutions.
@@ -221,7 +215,7 @@ const Index = () => {
             </div>
 
             <div className="text-center p-8 border-2 border-black">
-              <div className="text-5xl mb-4">💪</div>
+              
               <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">Quality Craftsmanship</h3>
               <p className="text-gray-700">
                 Our skilled artisans bring years of experience and dedication to every piece we create.
@@ -229,7 +223,6 @@ const Index = () => {
             </div>
 
             <div className="text-center p-8 border-2 border-black">
-              <div className="text-5xl mb-4">🤝</div>
               <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">Consultation First</h3>
               <p className="text-gray-700">
                 We work closely with you from concept to completion, ensuring your vision becomes reality.

@@ -11,33 +11,42 @@ import heroImage from "@/assets/hero-fabrication.jpg";
 import workshopHero from "@/assets/workshop-hero.jpg";
 import logo from "@/assets/alpha-wrights-logo.jpg";
 
-// Gallery categories with existing images
+// Gallery categories organized according to Alpha Wrights services
 const categories = [
   {
-    id: "metal-works",
-    name: "Metal Works",
+    id: "custom-steel-works",
+    name: "Custom Steel Works",
     images: [
-      { id: 1, src: weldingImage, alt: "Steel welding and metal fabrication" },
-      { id: 2, src: heroImage, alt: "Custom fabrication workshop" },
-      { id: 3, src: workshopHero, alt: "Workshop interior and equipment" },
+      { id: 1, src: weldingImage, alt: "Custom steel table bases and structures" },
+      { id: 2, src: heroImage, alt: "Steel doors, gates, and fences" },
+      { id: 3, src: workshopHero, alt: "Heavy duty shelves and steel boxes" },
     ],
   },
   {
-    id: "wood-works",
-    name: "Wood Works",
+    id: "furniture",
+    name: "Furniture",
     images: [
-      { id: 4, src: woodworkImage, alt: "Wood furniture and custom woodwork" },
-      { id: 5, src: customImage, alt: "Custom metal and wood combinations" },
-      { id: 6, src: logo, alt: "Alpha Wrights branding" },
+      { id: 4, src: woodworkImage, alt: "Coffee tables and dining tables" },
+      { id: 5, src: customImage, alt: "Office desks and work tables" },
+      { id: 6, src: logo, alt: "Wooden table tops and shelves" },
     ],
   },
   {
-    id: "custom-projects",
-    name: "Custom Projects",
+    id: "home-pictures",
+    name: "Home Pictures",
     images: [
-      { id: 7, src: customImage, alt: "Custom project showcase" },
-      { id: 8, src: weldingImage, alt: "Metal fabrication project" },
-      { id: 9, src: woodworkImage, alt: "Woodworking project" },
+      { id: 7, src: customImage, alt: "Custom decorative home pieces" },
+      { id: 8, src: weldingImage, alt: "Artistic metalwork and wall art" },
+      { id: 9, src: woodworkImage, alt: "Personalized home installations" },
+    ],
+  },
+  {
+    id: "integrated-works",
+    name: "Integrated Steel & Wood Works",
+    images: [
+      { id: 10, src: workshopHero, alt: "Steel and wood combinations" },
+      { id: 11, src: customImage, alt: "Mixed material furniture" },
+      { id: 12, src: heroImage, alt: "Hybrid design pieces" },
     ],
   },
 ];
@@ -53,12 +62,12 @@ const Gallery = () => {
         <div className="text-center mb-16">
           <h1 className="mb-4">Our Gallery</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Explore our portfolio of custom fabrications across different categories
+            Explore our portfolio organized by our four main service categories: Custom Steel Works, Furniture, Home Pictures, and Integrated Steel & Wood Works
           </p>
         </div>
 
         <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-12">
+          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 mb-12">
             {categories.map((category) => (
               <TabsTrigger key={category.id} value={category.id} className="text-base">
                 {category.name}

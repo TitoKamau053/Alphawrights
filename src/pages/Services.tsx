@@ -11,42 +11,59 @@ import customImage from "@/assets/service-custom.jpg";
 const Services = () => {
   const services = [
     {
-      title: "Steel Welding & Fabrication",
+      title: "Custom Steel Works",
       image: weldingImage,
       description:
-        "Professional steel welding and metal fabrication services for both residential and industrial applications.",
+        "Professional steel fabrication services for both residential and industrial applications. From structural elements to decorative pieces.",
       features: [
-        "Custom steel furniture frames",
-        "Structural steel work",
-        "Metal railings and gates",
-        "Industrial fabrication",
-        "Repairs and modifications",
+        "Custom table bases",
+        "Doors and gates",
+        "Fences and railings",
+        "Heavy duty shelves",
+        "Stairs and railings",
+        "Steel boxes and structures",
       ],
     },
     {
-      title: "Wood Furniture & Furnishings",
+      title: "Furniture",
       image: woodworkImage,
       description:
-        "Handcrafted wood furniture featuring live edge slabs, epoxy resin river tables, and custom designs.",
+        "Handcrafted furniture pieces featuring premium materials and custom designs for residential and commercial spaces.",
       features: [
-        "Live edge wood slabs",
-        "Epoxy resin river tables",
-        "Custom dining tables",
-        "Wood shelving and storage",
-        "Kiln drying services",
+        "Coffee tables",
+        "Dining tables",
+        "Office desks",
+        "Shelves and storage",
+        "Wooden table tops",
+        "Work tables",
       ],
     },
     {
-      title: "Custom Metal & Wood Combinations",
+      title: "Home Pictures",
       image: customImage,
       description:
-        "Unique pieces that combine the strength of steel with the warmth of wood for one-of-a-kind creations.",
+        "Custom decorative and functional pieces for your home, including wall art, decorative elements, and personalized installations.",
       features: [
-        "Industrial dining tables",
+        "Custom wall art",
+        "Decorative metal pieces",
+        "Personalized signage",
+        "Home decor elements",
+        "Custom installations",
+        "Artistic metalwork",
+      ],
+    },
+    {
+      title: "Integrated Steel and Wood Works",
+      image: workshopHero,
+      description:
+        "Unique pieces that combine the strength of steel with the warmth of wood for one-of-a-kind creations that blend materials beautifully.",
+      features: [
+        "Steel and wood dining tables",
         "Custom desks and workstations",
-        "Shelving units",
-        "Coffee and side tables",
-        "Commercial installations",
+        "Mixed material shelving",
+        "Industrial-style furniture",
+        "Custom structural elements",
+        "Hybrid design pieces",
       ],
     },
   ];
@@ -62,7 +79,7 @@ const Services = () => {
         <div className="relative z-10 text-center px-4">
           <h1 className="text-background mb-6">Our Services</h1>
           <p className="text-background/90 text-lg md:text-xl max-w-2xl mx-auto">
-            Expert craftsmanship in steel and wood fabrication
+            Expert craftsmanship across four main service categories: Custom Steel Works, Furniture, Home Pictures, and Integrated Steel and Wood Works
           </p>
         </div>
       </section>
