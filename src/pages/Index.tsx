@@ -43,6 +43,16 @@ const Index = () => {
             <Button asChild className="bg-transparent text-white px-10 py-4 tracking-widest text-sm font-bold uppercase hover:bg-white hover:text-black transition border-2 border-white">
               <Link to="/contact">Reach us out </Link>
             </Button>
+
+            <a
+              href="https://wa.me/254718145608"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-10 py-4 bg-green-500 hover:bg-green-600 text-white tracking-widest text-sm font-bold uppercase transition border-2 border-green-600"
+            >
+              <Phone className="w-4 h-4 mr-2" />
+              Chat on WhatsApp
+            </a>
           </div>
         </div>
       </section>

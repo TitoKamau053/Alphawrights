@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { send } from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Mail, Phone, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
+import { Mail, Phone, MapPin, Twitter } from "lucide-react";
+import TikTok from "@/components/ui/tiktok";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
@@ -17,36 +19,47 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const { name, email, phone, message } = formData;
-    
-    // WhatsApp message
-    const whatsappMessage = `Name: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
-    const whatsappUrl = `https://wa.me/254700000000?text=${whatsappMessage}`;
-    
-    // Email message
+
+    // Prefer sending via EmailJS (client-side) if environment variables are set.
+    // Set these in your Vite env (.env) as VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | service_fej6fsm;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | template_o6q2ld7;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | vLs5Pz2HbG5N_yUq8;
+
+    const templateParams = {
+      name,
+      email,
+      phone,
+      message,
+    };
+
+    if (SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY) {
+      try {
+        await send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+        toast({ title: "Message Sent!", description: "We'll get back to you as soon as possible." });
+        setFormData({ name: "", email: "", phone: "", message: "" });
+        return;
+      } catch (err) {
+        // if EmailJS fails, fall back to mailto
+        console.error('EmailJS send error:', err);
+        toast({ title: "Send failed", description: "Could not send via EmailJS, opening email client as fallback." });
+      }
+    }
+
+    // Fallback: open the user's mail client with prefilled message
     const emailSubject = encodeURIComponent(`Enquiry from ${name}`);
     const emailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`);
-    const emailUrl = `mailto:info@alphawrights.com?subject=${emailSubject}&body=${emailBody}`;
-    
-    // Open both
-    window.open(whatsappUrl, '_blank');
+    const emailUrl = `mailto:alphawrightsltd@outlook.com?subject=${emailSubject}&body=${emailBody}`;
     window.open(emailUrl, '_blank');
-    
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you as soon as possible.",
-    });
+
+    toast({ title: "Message Sent", description: "Opened your email client to send the enquiry." });
 
     // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
+    setFormData({ name: "", email: "", phone: "", message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -143,10 +156,10 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
                   <a
-                    href="mailto:info@alphawrights.com"
+                    href="mailto:alphawrightsltd@outlook.com"
                     className="text-muted-foreground hover:text-secondary transition-colors"
                   >
-                    info@alphawrights.com
+                    alphawrightsltd@outlook.com
                   </a>
                 </div>
               </div>
@@ -158,10 +171,12 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold mb-1">Phone</h3>
                   <a
-                    href="tel:+254700000000"
+                    href="https://wa.me/254718145608"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-secondary transition-colors"
                   >
-                    +254 700 000 000
+                    +254 718 145 608 (WhatsApp)
                   </a>
                 </div>
               </div>
@@ -205,31 +220,35 @@ const Contact = () => {
               <h3 className="font-semibold mb-4">Follow Us</h3>
               <div className="flex gap-4">
                 <a
-                  href="https://facebook.com"
+                  href={`https://twitter.com/AlphawrightsKe`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-secondary/10 rounded-none flex items-center justify-center hover:bg-secondary hover:text-primary-foreground transition-colors"
-                  aria-label="Facebook"
+                  aria-label="Twitter"
                 >
-                  <Facebook className="w-5 h-5" />
+                  <Twitter className="w-5 h-5" />
                 </a>
+
+                {/* TikTok - lucide may not include a tiktok icon; use a simple link with label */}
                 <a
-                  href="https://instagram.com"
+                  href={`https://www.tiktok.com/@alpha.wrights`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-secondary/10 rounded-none flex items-center justify-center hover:bg-secondary hover:text-primary-foreground transition-colors"
-                  aria-label="Instagram"
+                  aria-label="TikTok"
                 >
-                  <Instagram className="w-5 h-5" />
+                  <TikTok className="w-5 h-5" />
                 </a>
+
+                {/* Quick WhatsApp link */}
                 <a
-                  href="https://youtube.com"
+                  href={`https://wa.me/254718145608`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-secondary/10 rounded-none flex items-center justify-center hover:bg-secondary hover:text-primary-foreground transition-colors"
-                  aria-label="YouTube"
+                  className="w-12 h-12 bg-secondary/10 rounded-none flex items-center justify-center hover:bg-secondary hover:text-primary-foreground transition-colors text-sm"
+                  aria-label="WhatsApp"
                 >
-                  <Youtube className="w-5 h-5" />
+                  WhatsApp
                 </a>
               </div>
             </div>

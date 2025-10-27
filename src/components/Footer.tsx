@@ -1,4 +1,5 @@
-import { Mail, Phone, Facebook, Instagram, Youtube } from "lucide-react";
+import { Mail, Phone, Twitter } from "lucide-react";
+import TikTok from "@/components/ui/tiktok";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -41,48 +42,42 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Get In Touch</h3>
             <div className="space-y-3">
               <a
-                href="mailto:info@alphawrights.com"
+                href="mailto:alphawrightsltd@outlook.com"
                 className="flex items-center gap-2 text-primary-foreground/80 hover:text-secondary transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                info@alphawrights.com
+                alphawrightsltd@outlook.com
               </a>
               <a
-                href="tel:+254700000000"
+                href="https://wa.me/254718145608"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-primary-foreground/80 hover:text-secondary transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                +254 700 000 000
+                +254 718 145 608 (WhatsApp)
               </a>
 
               {/* Social Links */}
               <div className="flex gap-4 pt-4">
                 <a
-                  href="https://facebook.com"
+                  href={`https://twitter.com/AlphawrightsKe`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary-foreground/80 hover:text-secondary transition-colors"
-                  aria-label="Facebook"
+                  aria-label="Twitter"
                 >
-                  <Facebook className="w-5 h-5" />
+                  <Twitter className="w-5 h-5" />
                 </a>
+
                 <a
-                  href="https://instagram.com"
+                  href={`https://www.tiktok.com/@alpha.wrights`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary-foreground/80 hover:text-secondary transition-colors"
-                  aria-label="Instagram"
+                  aria-label="TikTok"
                 >
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://youtube.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary-foreground/80 hover:text-secondary transition-colors"
-                  aria-label="YouTube"
-                >
-                  <Youtube className="w-5 h-5" />
+                  <TikTok className="w-5 h-5" />
                 </a>
               </div>
             </div>
