@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { send } from "@emailjs/browser";
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,65 +8,65 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Mail, Phone, MapPin, Twitter } from "lucide-react";
 import TikTok from "@/components/ui/tiktok";
-import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
+  const formRef = useRef();
+  const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const [loading, setLoading] = useState(false);
 
-    const { name, email, phone, message } = formData;
+  const handleChange = (e) => {
+    const { target } = e;
+    const { name, value } = target;
 
-    // Prefer sending via EmailJS (client-side) if environment variables are set.
-    // Set these in your Vite env (.env) as VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY
-    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | service_fej6fsm;
-    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | template_o6q2ld7;
-    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | vLs5Pz2HbG5N_yUq8;
-
-    const templateParams = {
-      name,
-      email,
-      phone,
-      message,
-    };
-
-    if (SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY) {
-      try {
-        await send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
-        toast({ title: "Message Sent!", description: "We'll get back to you as soon as possible." });
-        setFormData({ name: "", email: "", phone: "", message: "" });
-        return;
-      } catch (err) {
-        // if EmailJS fails, fall back to mailto
-        console.error('EmailJS send error:', err);
-        toast({ title: "Send failed", description: "Could not send via EmailJS, opening email client as fallback." });
-      }
-    }
-
-    // Fallback: open the user's mail client with prefilled message
-    const emailSubject = encodeURIComponent(`Enquiry from ${name}`);
-    const emailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`);
-    const emailUrl = `mailto:alphawrightsltd@outlook.com?subject=${emailSubject}&body=${emailBody}`;
-    window.open(emailUrl, '_blank');
-
-    toast({ title: "Message Sent", description: "Opened your email client to send the enquiry." });
-
-    // Reset form
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    setForm({
+      ...form,
+      [name]: value,
+    });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    emailjs
+      .send(
+        'service_fej6fsm',
+        'template_o6q2ld7',
+        {
+          from_name: form.name,
+          to_name: "AlphaWrightsLtd",
+          from_email: form.email,
+          to_email: "alphawrightsltd@outlook.com",
+          phone: form.phone,
+          message: form.message,
+        },
+        'vLs5Pz2HbG5N-yUq8'
+      )
+      .then(
+        () => {
+          setLoading(false);
+          alert("Thank you. I will get back to you as soon as possible.");
+
+          setForm({
+            name: "",
+            email: "",
+            phone: "",
+            message: "",
+          });
+        },
+        (error) => {
+          setLoading(false);
+          console.error(error);
+
+          alert("Ahh, something went wrong. Please try again.");
+        }
+      );
   };
 
   return (
@@ -95,8 +95,8 @@ const Contact = () => {
               <div>
                 <Label htmlFor="name">Name</Label>
                 <Input
-                  id="name"
-                  value={formData.name}
+                  name="name"
+                  value={form.name}
                   onChange={handleChange}
                   placeholder="Your name"
                   required
@@ -106,9 +106,9 @@ const Contact = () => {
               <div>
                 <Label htmlFor="email">Email</Label>
                 <Input
-                  id="email"
+                  name="email"
                   type="email"
-                  value={formData.email}
+                  value={form.email}
                   onChange={handleChange}
                   placeholder="your@email.com"
                   required
@@ -118,9 +118,9 @@ const Contact = () => {
               <div>
                 <Label htmlFor="phone">Phone</Label>
                 <Input
-                  id="phone"
+                  name="phone"
                   type="tel"
-                  value={formData.phone}
+                  value={form.phone}
                   onChange={handleChange}
                   placeholder="+254 700 000 000"
                   className="rounded-none"
@@ -129,8 +129,8 @@ const Contact = () => {
               <div>
                 <Label htmlFor="message">Message</Label>
                 <Textarea
-                  id="message"
-                  value={formData.message}
+                  name="message"
+                  value={form.message}
                   onChange={handleChange}
                   placeholder="Tell us about your project..."
                   rows={6}

@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Menu, Search, ShoppingCart, User, Phone, Mail, MapPin } from "lucide-react";
-import heroImage from "@/assets/hero-fabrication.jpg";
-import weldingImage from "@/assets/service-welding.jpg";
-import woodworkImage from "@/assets/service-woodwork.jpg";
-import customImage from "@/assets/service-custom.jpg";
+const heroImage = "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834523/IMG_20250905_104259_aboq3o.jpg";
+const weldingImage = "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834011/IMG_20241210_133550_dlcttg.jpg";
+const woodworkImage = "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834736/IMG_20250801_145204_ohpnyn.jpg";
+const customImage = "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834689/IMG_20250823_130202_lagaf6.jpg";
 import logo from "@/assets/alpha-wrights-logo.jpg";
 
 const Index = () => {

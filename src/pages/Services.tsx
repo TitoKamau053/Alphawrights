@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { CheckCircle2 } from "lucide-react";
-import workshopHero from "@/assets/workshop-hero.jpg";
-import weldingImage from "@/assets/service-welding.jpg";
-import woodworkImage from "@/assets/service-woodwork.jpg";
-import customImage from "@/assets/service-custom.jpg";
+const workshopHero = "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834974/IMG_20250612_141120_lwcmne.jpg";
+const weldingImage = "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834011/IMG_20241210_133550_dlcttg.jpg";
+const woodworkImage = "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834736/IMG_20250801_145204_ohpnyn.jpg";
+import homepictures from "@/assets/homepictures.jpeg";
 
 const Services = () => {
   const services = [
@@ -40,7 +40,7 @@ const Services = () => {
     },
     {
       title: "Home Pictures",
-      image: customImage,
+      image: homepictures,
       description:
         "Custom decorative and functional pieces for your home, including wall art, decorative elements, and personalized installations.",
       features: [

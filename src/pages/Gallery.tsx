@@ -1,107 +1,93 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import weldingImage from "@/assets/service-welding.jpg";
-import woodworkImage from "@/assets/service-woodwork.jpg";
-import customImage from "@/assets/service-custom.jpg";
-import heroImage from "@/assets/hero-fabrication.jpg";
-import workshopHero from "@/assets/workshop-hero.jpg";
-import logo from "@/assets/alpha-wrights-logo.jpg";
+type ImageItem = { id: string; src: string };
+type GalleryGroup = { category: string; count: number; cover: string | null; images: ImageItem[] };
 
-// Gallery categories organized according to Alpha Wrights services
-const categories = [
-  {
-    id: "custom-steel-works",
-    name: "Custom Steel Works",
-    images: [
-      { id: 1, src: weldingImage, alt: "Custom steel table bases and structures" },
-      { id: 2, src: heroImage, alt: "Steel doors, gates, and fences" },
-      { id: 3, src: workshopHero, alt: "Heavy duty shelves and steel boxes" },
-    ],
-  },
-  {
-    id: "furniture",
-    name: "Furniture",
-    images: [
-      { id: 4, src: woodworkImage, alt: "Coffee tables and dining tables" },
-      { id: 5, src: customImage, alt: "Office desks and work tables" },
-      { id: 6, src: logo, alt: "Wooden table tops and shelves" },
-    ],
-  },
-  {
-    id: "home-pictures",
-    name: "Home Pictures",
-    images: [
-      { id: 7, src: customImage, alt: "Custom decorative home pieces" },
-      { id: 8, src: weldingImage, alt: "Artistic metalwork and wall art" },
-      { id: 9, src: woodworkImage, alt: "Personalized home installations" },
-    ],
-  },
-  {
-    id: "integrated-works",
-    name: "Integrated Steel & Wood Works",
-    images: [
-      { id: 10, src: workshopHero, alt: "Steel and wood combinations" },
-      { id: 11, src: customImage, alt: "Mixed material furniture" },
-      { id: 12, src: heroImage, alt: "Hybrid design pieces" },
-    ],
-  },
-];
+export default function Gallery() {
+  const [groups, setGroups] = useState<GalleryGroup[]>([]);
+  const [loading, setLoading] = useState(true);
 
-const Gallery = () => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0].id);
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch("/nested-gallery.json");
+        if (!res.ok) throw new Error("Not found");
+        const data = await res.json();
+        setGroups(data);
+      } catch (e) {
+        console.warn("Could not load /nested-gallery.json, frontend will be empty.", e);
+        setGroups([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    load();
+  }, []);
 
   return (
-    <div className="min-h-screen">
+    <>
       <Navigation />
+      <section className="py-10 px-6 md:px-16 bg-gray-50 min-h-screen">
+        <h1 className="text-3xl font-bold text-center mb-6">Our Gallery</h1>
 
-      <section className="section-container mt-16">
-        <div className="text-center mb-16">
-          <h1 className="mb-4">Our Gallery</h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Explore our portfolio organized by our four main service categories: Custom Steel Works, Furniture, Home Pictures, and Integrated Steel & Wood Works
-          </p>
-        </div>
+        {loading ? (
+          <div className="text-center text-gray-500">Loading gallery…</div>
+        ) : groups.length === 0 ? (
+          <div className="text-center text-gray-600">No gallery data available. Run the generator to populate /public/nested-gallery.json</div>
+        ) : (
+          <div className="space-y-8">
+            {groups.map((g, idx) => {
+              const parts = g.category.split("/");
+              const title = parts[parts.length - 1] || g.category || "Gallery";
 
-        <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 mb-12">
-            {categories.map((category) => (
-              <TabsTrigger key={category.id} value={category.id} className="text-base">
-                {category.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
-          {categories.map((category) => (
-            <TabsContent key={category.id} value={category.id}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {category.images.map((image, index) => (
-                  <Card
-                    key={image.id}
-                    className="overflow-hidden group cursor-pointer animate-fade-in hover-scale"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <div className="aspect-square overflow-hidden">
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
+              return (
+                <article key={g.category + idx} className="bg-white rounded-lg shadow overflow-hidden">
+                  <div className="md:flex">
+                    {/* Left vertical bar */}
+                    <div className="w-28 bg-amber-400 text-black flex-shrink-0 flex flex-col justify-center p-4">
+                      <div className="text-xs uppercase font-semibold">{title}</div>
+                      <div className="text-sm text-gray-800 mt-2">{g.count} items</div>
+                      <div className="mt-auto text-6xl font-bold text-black opacity-10 select-none">{String(idx + 1).padStart(2, '0')}</div>
                     </div>
-                  </Card>
-                ))}
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
+
+                    {/* Right content */}
+                    <div className="flex-1 p-4">
+                      <div className="md:flex md:items-start gap-4">
+                        <div className="md:w-2/3 w-full">
+                          {g.cover ? (
+                            <img src={g.cover} alt={title} className="w-full h-64 md:h-56 object-cover rounded-md" />
+                          ) : (
+                            <div className="w-full h-64 md:h-56 bg-gray-100 rounded-md flex items-center justify-center text-gray-400">No image</div>
+                          )}
+                        </div>
+
+                        <div className="md:w-1/3 w-full mt-4 md:mt-0">
+                          <h3 className="text-xl font-semibold">{g.category}</h3>
+                          <p className="text-sm text-gray-600 mt-2">A selection of work from the {title} collection. Click any item to view larger.</p>
+
+                          <div className="mt-4 grid grid-cols-3 gap-2">
+                            {g.images.slice(0, 6).map((img) => (
+                              <button key={img.id} className="h-20 w-full overflow-hidden rounded-md bg-gray-50">
+                                <img src={img.src} alt={img.id} className="w-full h-full object-cover" />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
       </section>
-
       <Footer />
-    </div>
+    </>
   );
-};
+}
 
-export default Gallery;
