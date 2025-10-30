@@ -8,6 +8,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Mail, Phone, MapPin, Twitter } from "lucide-react";
 import TikTok from "@/components/ui/tiktok";
+import { toast } from "@/components/ui/sonner";
+import { CheckCircle, XCircle } from "lucide-react";
 
 const Contact = () => {
   const formRef = useRef();
@@ -51,7 +53,11 @@ const Contact = () => {
       .then(
         () => {
           setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
+          toast("Message sent successfully!", {
+            description: "Thank you. We will get back to you as soon as possible.",
+            icon: <CheckCircle className="w-4 h-4 text-green-500" />,
+            duration: 4000,
+          });
 
           setForm({
             name: "",
@@ -64,7 +70,11 @@ const Contact = () => {
           setLoading(false);
           console.error(error);
 
-          alert("Ahh, something went wrong. Please try again.");
+          toast("Failed to send message", {
+            description: "Something went wrong. Please try again.",
+            icon: <XCircle className="w-4 h-4 text-red-500" />,
+            duration: 4000,
+          });
         }
       );
   };

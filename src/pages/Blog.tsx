@@ -8,25 +8,11 @@ import { Youtube } from "lucide-react";
 const blogPosts = [
   {
     id: 1,
-    title: "Custom Steel Gate Fabrication Process",
-    description: "Watch our step-by-step process for creating a custom steel gate from design to installation.",
-    videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
-    date: "2024-03-15",
-  },
-  {
-    id: 2,
-    title: "Live Edge Table with Epoxy Resin",
-    description: "Creating a stunning live edge wood table with black epoxy resin river.",
-    videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
-    date: "2024-03-10",
-  },
-  {
-    id: 3,
-    title: "Metal Workshop Safety & Best Practices",
-    description: "Essential safety guidelines and best practices for metal fabrication work.",
-    videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
-    date: "2024-03-05",
-  },
+    title: "This Dining Table Redefines Modern Craftsmanship- By Alpha Wrights",
+    description: "This custom dining table features a solid hardwood top and a sleek black steel frame — designed and fabricated in-house at Alpha Wrights.",
+    videoId: "KIetINirVeE", 
+    date: "2025-10-20",
+  }
 ];
 
 const Blog = () => {
@@ -42,7 +28,7 @@ const Blog = () => {
           </p>
           <Button asChild variant="default" size="lg" className="animate-on-hover">
             <a
-              href="https://youtube.com/@alphawrights"
+              href="https://www.youtube.com/@Fabrication-Gurus"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2"
@@ -53,7 +39,7 @@ const Blog = () => {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
           {blogPosts.map((post, index) => (
             <Card
               key={post.id}

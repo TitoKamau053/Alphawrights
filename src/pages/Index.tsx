@@ -36,24 +36,35 @@ const Index = () => {
             Authenticating our craft through precision, quality, and dedication to bringing your custom vision to life
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild className="bg-white text-black px-10 py-4 tracking-widest text-sm font-bold uppercase hover:bg-gray-200 transition border-2 border-white">
-              <Link to="/gallery">View our works</Link>
-            </Button>
-            <Button asChild className="bg-transparent text-white px-10 py-4 tracking-widest text-sm font-bold uppercase hover:bg-white hover:text-black transition border-2 border-white">
-              <Link to="/contact">Reach us out </Link>
-            </Button>
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                asChild
+                className="bg-transparent text-white px-10 py-4 tracking-widest text-sm font-bold uppercase hover:bg-gray-200 hover:text-black transition border-2 border-white w-full sm:w-[260px]"
+              >
+                <Link to="/gallery">View our works</Link>
+              </Button>
+
+              <Button
+                asChild
+                className="bg-transparent text-white px-10 py-4 tracking-widest text-sm font-bold uppercase hover:bg-white hover:text-black transition border-2 border-white w-full sm:w-[260px]"
+              >
+                <Link to="/contact">Reach us out</Link>
+              </Button>
+            </div>
 
             <a
               href="https://wa.me/254718145608"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-10 py-4 bg-green-500 hover:bg-green-600 text-white tracking-widest text-sm font-bold uppercase transition border-2 border-green-600"
+              className="inline-flex items-center justify-center px-10 py-4 bg-transparent-500 hover:bg-green-600 text-white tracking-widest text-sm font-bold uppercase transition border-2 border-white w-full sm:w-[260px]"
             >
               <Phone className="w-4 h-4 mr-2" />
               Chat on WhatsApp
             </a>
           </div>
+
+
         </div>
       </section>
 
