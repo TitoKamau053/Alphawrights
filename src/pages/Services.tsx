@@ -6,7 +6,7 @@ import { CheckCircle2 } from "lucide-react";
 const workshopHero = "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834974/IMG_20250612_141120_lwcmne.jpg";
 const weldingImage = "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834011/IMG_20241210_133550_dlcttg.jpg";
 const woodworkImage = "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834736/IMG_20250801_145204_ohpnyn.jpg";
-import homepictures from "@/assets/homepictures.jpeg";
+const homepictures = "/assets/homepictures";
 
 const Services = () => {
   const services = [
