@@ -9,11 +9,16 @@ import { Phone } from "lucide-react";
 const logo = "/assets/homepagelogo.jpg";
 const heroVideo = "/assets/herovideo.mp4";
 
-// Cloudinary images
-const weldingImage =
-  "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834011/IMG_20241210_133550_dlcttg.jpg";
-const woodworkImage =
-  "https://res.cloudinary.com/dlmrb08x1/image/upload/v1761834736/IMG_20250801_145204_ohpnyn.jpg";
+const weldingImage = "/assets/metalworks_home.jpg"; 
+const woodworkImage = "/assets/furnishes_home.jpg";
+
+const carports = "/assets/services/carports.jpg";
+const doors = "/assets/services/doors.jpg";
+const enclosures = "/assets/services/enclosures.jpg";
+const fences = "/assets/services/fences.jpg";
+const gates = "/assets/services/gates.jpg";
+const shelves = "/assets/services/shelves.jpg";
+
 
 const Index = () => {
   // Define services
@@ -77,7 +82,6 @@ const Index = () => {
 
       <Navigation />
 
-      {/* ✅ Updated Hero Section with Parallax Video */}
       <section className="relative w-full h-[70vh] sm:h-screen flex items-center justify-center text-center overflow-hidden">
         {/* Background Video */}
         <video
@@ -179,7 +183,7 @@ const Index = () => {
 
               {/* Mobile Text Overlay */}
               <div className="absolute inset-0 md:hidden flex items-center justify-center">
-                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0"></div>
+                <div className="absolute inset-0 bg-black/25 "></div>
 
                 <div className="relative z-10 text-white p-4 rounded-xl w-full h-full overflow-y-auto flex flex-col items-center justify-center">
                   <h3 className="text-xl font-bold mb-2 text-center">
@@ -217,6 +221,109 @@ const Index = () => {
           </div>
         </div>
       </section>
+      
+
+    {/* Collections Section */}
+    <section className="py-20 px-6 md:px-12 bg-gray-100">
+      <div className="max-w-6xl mx-auto text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-[0.2em]">
+          Our Collections
+        </h2>
+        <p className="text-gray-600 mt-4">
+          Explore our crafted range — where steel and wood meet artistry.
+        </p>
+      </div>
+
+      {/* Collection Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {[
+          {
+            title: "Carports and Working Shades",
+            image: carports,
+            link: "/collections/carports",
+            subtitle: "Load-considered shades",
+            description:
+              "Architectural carports & work shades — designed for form and function.",
+          },
+          {
+            title: "Doors",
+            image: doors,
+            link: "/collections/doors",
+            subtitle: "Secure, stylish entrances",
+            description: "Precision-built doors with clean, architectural lines.",
+          },
+          {
+            title: "Enclosures",
+            image: enclosures,
+            link: "/collections/enclosures",
+            subtitle: "Durable enclosures",
+            description: "Protective enclosures custom-fit for equipment and spaces.",
+          },
+          {
+            title: "Fences",
+            image: fences,
+            link: "/collections/fences",
+            subtitle: "Boundary solutions",
+            description: "Custom fencing that balances security and design.",
+          },
+          {
+            title: "Gates",
+            image: gates,
+            link: "/collections/gates",
+            subtitle: "Architectural gates",
+            description: "Gates crafted for presence, durability, and function.",
+          },
+          {
+            title: "Shelves",
+            image: shelves,
+            link: "/collections/shelves",
+            subtitle: "Storage & display",
+            description: "Heavy-duty shelving and refined storage solutions.",
+          },
+        ].map((item, index) => (
+          <Link
+            key={index}
+            to={item.link}
+            className="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer"
+          >
+            <div className="relative w-full h-72">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+              />
+
+              {/* subtle overlay */}
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300" />
+
+              {/* centered content */}
+              <div className="absolute inset-0 flex items-center justify-center p-6">
+                <div className="text-white text-center max-w-xl">
+                  {item.subtitle && (
+                    <p className="text-xs tracking-widest uppercase mb-4 opacity-90">
+                      {item.subtitle}
+                    </p>
+                  )}
+
+                  <h3 className="text-2xl md:text-3xl font-black uppercase tracking-[0.12em] mb-3">
+                    {item.title}
+                  </h3>
+
+                  {item.description && (
+                    <p className="text-sm text-white/90 mb-6">{item.description}</p>
+                  )}
+
+                  <div className="inline-block bg-white text-black px-6 py-2 text-sm font-semibold uppercase rounded">
+                    View Collection
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+
 
       {/* Why Choose Us */}
       <section className="py-20 px-4">
