@@ -12,6 +12,14 @@ const blogPosts = [
     description: "This custom dining table features a solid hardwood top and a sleek black steel frame — designed and fabricated in-house at Alpha Wrights.",
     videoId: "KIetINirVeE", 
     date: "2025-10-20",
+  },
+
+    {
+    id: 2,
+    title: "Modern Mahogany Epoxy Coffee Table",
+    description: "Modern Mahogany Epoxy Coffee Table | Handcrafted Steel Frame | Alpha Wrights Kenya",
+    videoId: "7E3yM0Bkcu0", 
+    date: "2025-11-11",
   }
 ];
 

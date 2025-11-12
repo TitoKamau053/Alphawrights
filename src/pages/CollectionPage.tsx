@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 
       const collections = {
@@ -11,7 +12,7 @@ import { Link } from "react-router-dom";
             "Built with high-quality steel for long-lasting performance and weather resistance.",
             "Custom sizes and designs available to fit any space and aesthetic preference.",
           ],
-          subtypes: Array.from({ length: 12 }, (_, i) => ({
+          subtypes: Array.from({ length: 11 }, (_, i) => ({
             title: `Carport ${i + 1}`,
             image: `/assets/collections/carports/carports${i + 1}.jpg`,
           })),
@@ -37,7 +38,7 @@ import { Link } from "react-router-dom";
             "Built to protect and enhance your space with sturdy steel construction.",
             "Custom designs available to meet your specific requirements and dimensions.",
           ],
-          subtypes: Array.from({ length: 31 }, (_, i) => ({
+          subtypes: Array.from({ length: 6 }, (_, i) => ({
             title: `Enclosure ${i + 1}`,
             image: `/assets/collections/enclosures/enclosures${i + 1}.jpg`,
           })),
@@ -50,7 +51,7 @@ import { Link } from "react-router-dom";
             "Available in multiple styles, heights, and materials to suit your needs.",
             "Tailored to complement your property's landscape and architectural style.",
           ],
-          subtypes: Array.from({ length: 11 }, (_, i) => ({
+          subtypes: Array.from({ length: 10 }, (_, i) => ({
             title: `Fence ${i + 1}`,
             image: `/assets/collections/fences/fences${i + 1}.jpg`,
           })),
@@ -63,7 +64,7 @@ import { Link } from "react-router-dom";
             "Choose from modern, rustic, or industrial styles — all tailored to your space.",
             "Our gates not only provide security but also enhance the overall look of your property with high-quality craftsmanship.",
           ],
-          subtypes: Array.from({ length: 32 }, (_, i) => ({
+          subtypes: Array.from({ length: 12 }, (_, i) => ({
             title: `Gate ${i + 1}`,
             image: `/assets/collections/gates/gates${i + 1}.jpg`,
           })),
@@ -87,6 +88,9 @@ import { Link } from "react-router-dom";
       const { collectionId } = useParams();
       const key = (collectionId || "").toLowerCase();
       const collection = collections[key];
+
+      const [activeSubtype, setActiveSubtype] = useState(null);
+
 
       if (!collection) {
         return <div className="p-10 text-center text-gray-600">Collection not found.</div>;
@@ -157,31 +161,85 @@ import { Link } from "react-router-dom";
 
           {/* Subtype Grid */}
           {collection.subtypes?.length > 0 && (
-            <section className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-10 px-4">
-              {collection.subtypes.map((sub: any, i: number) => (
-                <article
-                  key={i}
-                  className="relative group rounded-xl overflow-hidden shadow-lg"
+            <>
+              <section className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-10 px-4">
+                {collection.subtypes.map((sub: any, i: number) => (
+                  <article
+                    key={i}
+                    className="relative rounded-xl overflow-hidden shadow-lg cursor-pointer group"
+                    onClick={() => setActiveSubtype(sub)}
+                  >
+                    <img
+                      src={sub.image}
+                      alt={`${sub.title} preview image`}
+                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-semibold text-lg">
+                      Click to View
+                    </div>
+                  </article>
+                ))}
+              </section>
+
+              {/* Enlarged Modal View */}
+              {activeSubtype && (
+                <div
+                  className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                  onClick={() => setActiveSubtype(null)} // close modal on background click
                 >
-                  <img
-                    src={sub.image}
-                    alt={`${sub.title} preview image`}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition duration-300 flex flex-col items-center justify-center">
-                    <span className="text-white text-lg font-semibold uppercase tracking-wide mb-4 text-center drop-shadow-lg transition-opacity duration-300 group-hover:opacity-100 opacity-90">
-                      {sub.title}
-                    </span>
-                    <Link
-                      to={sub.link || "/contact"}
-                      className="bg-white text-gray-900 font-bold px-5 py-2 rounded shadow hover:bg-gray-100 transition"
+                  <div
+                    className="relative bg-white rounded-2xl overflow-hidden shadow-2xl max-w-4xl w-full"
+                    onClick={(e) => e.stopPropagation()} // prevent close when clicking image
+                  >
+                    {/* Close Button */}
+                    <button
+                      onClick={() => setActiveSubtype(null)}
+                      className="absolute top-3 right-3 text-white bg-black/60 hover:bg-black text-xl font-bold rounded-full w-8 h-8 flex items-center justify-center"
                     >
-                      Request Quote
-                    </Link>
+                      &times;
+                    </button>
+
+                    {/* Enlarged Image */}
+                    <img
+                      src={activeSubtype.image}
+                      alt={activeSubtype.title}
+                      className="w-full max-h-[80vh] object-contain bg-black"
+                    />
+
+                    {/* Caption */}
+                    <div className="p-4 text-center">
+                      <h4 className="text-xl font-bold uppercase tracking-wide mb-2 text-gray-800">
+                        {activeSubtype.title}
+                      </h4>
+                      <p className="text-gray-600 text-sm mb-4">
+                        {
+                          collection.description[
+                            collection.subtypes.indexOf(activeSubtype) %
+                              collection.description.length
+                          ]
+                        }
+                      </p>
+                        <Link
+                          to="/contact"
+                          state={{
+                            collection: key,
+                            title: activeSubtype.title,
+                            image: activeSubtype.image,
+                            description:
+                              collection.description[
+                                collection.subtypes.indexOf(activeSubtype) % collection.description.length
+                              ],
+                          }}
+                          className="bg-gray-900 text-white font-bold px-5 py-2 rounded shadow hover:bg-gray-700 transition"
+                        >
+                          Request Quote
+                        </Link>
+
+                    </div>
                   </div>
-                </article>
-              ))}
-            </section>
+                </div>
+              )}
+            </>
           )}
         </main>
       );

@@ -9,8 +9,8 @@ const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Gallery", path: "/gallery" },
+    { name: "Home", path: "/", hash: null },
+    { name: "Gallery", path: "/", hash: "#collections" },
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
     { name: "Portfolio", path: "/portfolio.pdf", download: true },
@@ -29,28 +29,33 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              item.download ? (
-                <a
-                  key={item.path}
-                  href={item.path}
-                  download="AlphaWrights-Portfolio.pdf"
-                  className="text-sm font-medium tracking-wide transition-colors hover:text-accent animate-on-hover"
-                >
-                  {item.name}
-                </a>
-              ) : (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`text-sm font-medium tracking-wide transition-colors hover:text-accent ${
-                    isActive(item.path) ? "text-accent" : "text-foreground"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              )
-            ))}
+          {navItems.map((item) => {
+            const key = `${item.name}-${item.hash || item.path}`;
+            return item.download ? (
+              <a
+                key={key}
+                href={item.path}
+                download="AlphaWrights-Portfolio.pdf"
+                className="text-sm font-medium tracking-wide transition-colors hover:text-accent"
+              >
+                {item.name}
+              </a>
+            ) : (
+              <Link
+                key={key}
+                to={item.path}
+                state={item.hash ? { scrollTo: item.hash } : undefined}
+                onClick={() => setIsOpen(false)}
+                className={`text-sm font-medium tracking-wide transition-colors hover:text-accent ${
+                  isActive(item.path) && !item.hash ? "text-accent" : "text-foreground"
+                }`}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
+
+
             <Button asChild variant="secondary" size="sm" className="animate-on-hover">
               <Link to="/contact">Send Enquiry</Link>
             </Button>

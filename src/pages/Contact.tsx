@@ -10,15 +10,26 @@ import { Mail, Phone, MapPin, Twitter } from "lucide-react";
 import TikTok from "@/components/ui/tiktok";
 import { toast } from "@/components/ui/sonner";
 import { CheckCircle, XCircle } from "lucide-react";
+import { useLocation } from "react-router-dom";
+
 
 const Contact = () => {
   const formRef = useRef();
+  const location = useLocation();
+  const quoteData = location.state;
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    message: "",
+    message: quoteData
+    ? `Hello, I'm interested in a quote for the following item:
+      Collection: ${quoteData.collection}
+      Item: ${quoteData.title}
+      Description: ${quoteData.description}
+      Please let me know the next steps.`
+      : "",
   });
+
 
   const [loading, setLoading] = useState(false);
 

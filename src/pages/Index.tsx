@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import { useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Phone } from "lucide-react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const logo = "/assets/homepagelogo.jpg";
 const heroVideo = "/assets/herovideo.mp4";
@@ -18,6 +20,9 @@ const enclosures = "/assets/services/enclosures.jpg";
 const fences = "/assets/services/fences.jpg";
 const gates = "/assets/services/gates.jpg";
 const shelves = "/assets/services/shelves.jpg";
+
+
+
 
 
 const Index = () => {
@@ -41,12 +46,12 @@ const Index = () => {
       description: [
         "Precision-built steel solutions crafted for strength, function, and lasting design.",
         "Our metalwork spans a range of specialized categories, each engineered for purpose and built to last:",
-        "- Custom Fabrications: Bespoke steel builds — from automotive structures to industrial components.",
-        "- Gates, Doors & Fencing: Secure architectural metalwork with clean lines and modern symmetry.",
-        "- Steel Enclosures & Cages: Protective structures for storage and generators — designed for resilience.",
-        "- Custom Signages: Durable identity pieces with refined detailing and visual precision.",
-        "- Carports & Work Shades: Load-considered shade structures with sleek architectural integration.",
-        "- Machinery Builds & Welding Repairs: Fabrication, reinforcement, and restoration for longevity.",
+        "- Custom Fabrications",
+        "- Gates, Doors & Fencing",
+        "- Steel Enclosures & Cages",
+        "- Custom Signages",
+        "- Carports & Work Shades",
+        "- Machinery Builds & Welding Repairs",
       ],
       image: weldingImage,
     },
@@ -55,16 +60,38 @@ const Index = () => {
       description: [
         "Furniture where steel structure meets the warmth of natural wood — elevating everyday spaces.",
         "Each piece is crafted to balance strength and elegance, across a range of refined categories:",
-        "- Coffee Tables: Centerpieces with clean structure and effortless visual presence.",
-        "- Dining & Conference Tables: Designs that gather people with intention — for homes, offices, or boardrooms.",
-        "- Office Desks: Precision-built workspaces with comfort-minded design and professional presence.",
-        "- Shelving & Storage Units: Functional simplicity that organizes space and complements interiors.",
-        "- Outdoor Furniture: Weather-considered comfort with steel frameworks and warm wooden finishes.",
-        "- TV Consoles & Accent Pieces: Minimal, balanced details that complete a space with quiet expression.",
+        "- Coffee Tables:",
+        "- Dining & Conference Tables",
+        "- Office Desks",
+        "- Shelving & Storage Units",
+        "- Outdoor Furniture",
+        "- TV Consoles & Accent Pieces",
       ],
       image: woodworkImage,
     },
   };
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const scrollTarget = location.state?.scrollTo;
+    if (scrollTarget) {
+      const el = document.querySelector(scrollTarget);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
+    useEffect(() => {
+      if (window.location.hash) {
+        const el = document.querySelector(window.location.hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }, []);
+
 
   const [activeTab, setActiveTab] = useState<keyof typeof services>("steel");
   const active = services[activeTab];
@@ -121,7 +148,7 @@ const Index = () => {
               asChild
               className="bg-transparent text-white px-8 py-3 sm:px-10 sm:py-4 tracking-widest text-sm font-bold uppercase hover:bg-gray-200 hover:text-black transition border-2 border-white w-full sm:w-[240px]"
             >
-              <Link to="/gallery">View our works</Link>
+              <Link to="/" state={{ scrollTo: "#collections" }}>View our works</Link>
             </Button>
 
             <Button
@@ -224,7 +251,7 @@ const Index = () => {
       
 
     {/* Collections Section */}
-    <section className="py-20 px-6 md:px-12 bg-gray-100">
+    <section id="collections" className="py-20 px-6 md:px-12 bg-gray-100">
       <div className="max-w-6xl mx-auto text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-[0.2em]">
           Our Collections
@@ -390,7 +417,7 @@ const Index = () => {
               asChild
               className="bg-transparent text-white px-10 py-4 tracking-widest text-sm font-bold uppercase hover:bg-white hover:text-black transition border-2 border-white"
             >
-              <Link to="/gallery">View Our Portfolio</Link>
+              <Link to="/" state={{ scrollTo: "#collections" }}>View our Works</Link>
             </Button>
           </div>
         </div>
