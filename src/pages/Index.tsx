@@ -58,6 +58,7 @@ const Index = () => {
         "- Custom Signages",
         "- Carports & Work Shades",
         "- Machinery Builds & Welding Repairs",
+        "- Staircase and Handrails",
       ],
       image: weldingImage,
     },
