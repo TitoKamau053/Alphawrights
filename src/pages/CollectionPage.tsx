@@ -1,88 +1,165 @@
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Navigation from "@/components/Navigation";
 
 
-      const collections = {
-        carports: {
-          title: "Carports and Working Shades",
-          hero: "/assets/services/carports.jpg", // hero image = homepage image
-          description: [
-            "Durable and stylish carports designed to protect your vehicles from the elements.",
-            "Built with high-quality steel for long-lasting performance and weather resistance.",
-            "Custom sizes and designs available to fit any space and aesthetic preference.",
-          ],
-          subtypes: Array.from({ length: 11 }, (_, i) => ({
-            title: `Carport ${i + 1}`,
-            image: `/assets/collections/carports/carports${i + 1}.jpg`,
-          })),
-        },
-        doors: {
-          title: "Custom Doors",
-          hero: "/assets/services/doors.jpg",
-          description: [
-            "Elegant and secure custom doors for your home or business entrance.",
-            "Available in various styles, materials, and finishes to match your design needs.",
-            "Precision crafted for perfect fit, function, and added security.",
-          ],
-          subtypes: Array.from({ length: 13 }, (_, i) => ({
-            title: `Door ${i + 1}`,
-            image: `/assets/collections/doors/doors${i + 1}.jpg`,
-          })),
-        },
-        enclosures: {
-          title: "Custom Enclosures",
-          hero: "/assets/services/enclosures.jpg",
-          description: [
-            "Versatile enclosures for various applications, from garden structures to industrial uses.",
-            "Built to protect and enhance your space with sturdy steel construction.",
-            "Custom designs available to meet your specific requirements and dimensions.",
-          ],
-          subtypes: Array.from({ length: 6 }, (_, i) => ({
-            title: `Enclosure ${i + 1}`,
-            image: `/assets/collections/enclosures/enclosures${i + 1}.jpg`,
-          })),
-        },
-        fences: {
-          title: "Custom Fences",
-          hero: "/assets/services/fences.jpg",
-          description: [
-            "Strong and attractive fences for security, privacy, and property definition.",
-            "Available in multiple styles, heights, and materials to suit your needs.",
-            "Tailored to complement your property's landscape and architectural style.",
-          ],
-          subtypes: Array.from({ length: 10 }, (_, i) => ({
-            title: `Fence ${i + 1}`,
-            image: `/assets/collections/fences/fences${i + 1}.jpg`,
-          })),
-        },
-        gates: {
-          title: "Custom Gates",
-          hero: "/assets/services/gates.jpg",
-          description: [
-            "Secure and stylish, our gates are built with precision and architectural harmony.",
-            "Choose from modern, rustic, or industrial styles — all tailored to your space.",
-            "Our gates not only provide security but also enhance the overall look of your property with high-quality craftsmanship.",
-          ],
-          subtypes: Array.from({ length: 12 }, (_, i) => ({
-            title: `Gate ${i + 1}`,
-            image: `/assets/collections/gates/gates${i + 1}.jpg`,
-          })),
-        },
-        shelves: {
-          title: "Custom Shelves",
-          hero: "/assets/services/shelves.jpg",
-          description: [
-            "Heavy-duty shelves for storage and organization in homes, garages, or warehouses.",
-            "Built with steel for durability and strength to handle heavy loads.",
-            "Custom sizes and configurations available to maximize your space.",
-          ],
-          subtypes: Array.from({ length: 6 }, (_, i) => ({
-            title: `Shelf ${i + 1}`,
-            image: `/assets/collections/shelves/shelves${i + 1}.jpg`,
-          })),
-        },
-      };
+const collections = {
+  carports: {
+    title: "Carports and Working Shades",
+    hero: "/assets/services/carports.jpg",
+    description: [
+      "Protect your vehicles and workspaces with durable, weather-resistant carports designed for both function and style.",
+      "Each unit is expertly engineered with reinforced steel frames to ensure long-lasting strength against sun, wind, and rain.",
+      "From single-vehicle shelters to expansive shades, every carport is custom-built to complement your property’s layout and aesthetics."
+    ],
+    subtypes: Array.from({ length: 11 }, (_, i) => ({
+      title: `Carport ${i + 1}`,
+      image: `/assets/collections/carports/carports${i + 1}.jpg`,
+    })),
+  },
+
+  doors: {
+    title: "Custom Doors",
+    hero: "/assets/services/doors.jpg",
+    description: [
+      "Redefine entryways with premium custom steel doors that combine security, durability, and refined craftsmanship.",
+      "Our doors are available in contemporary, industrial, and classic styles—each tailored to suit your architectural design.",
+      "Built with precision engineering, every door offers a seamless blend of strength, function, and elegance."
+    ],
+    subtypes: Array.from({ length: 13 }, (_, i) => ({
+      title: `Door ${i + 1}`,
+      image: `/assets/collections/doors/doors${i + 1}.jpg`,
+    })),
+  },
+
+  enclosures: {
+    title: "Custom Enclosures",
+    hero: "/assets/services/enclosures.jpg",
+    description: [
+      "Transform open spaces into protected zones with expertly built enclosures that combine utility and design.",
+      "Ideal for gardens, workshops, machinery, or industrial areas—each enclosure is customized for your exact use case.",
+      "Constructed from heavy-duty steel and finished with precision detailing to ensure safety, ventilation, and durability."
+    ],
+    subtypes: Array.from({ length: 6 }, (_, i) => ({
+      title: `Enclosure ${i + 1}`,
+      image: `/assets/collections/enclosures/enclosures${i + 1}.jpg`,
+    })),
+  },
+
+  fences: {
+    title: "Custom Fences",
+    hero: "/assets/services/fences.jpg",
+    description: [
+      "Define your boundaries with strength and style using our expertly crafted custom steel fences.",
+      "Available in a range of patterns and finishes—from sleek modern panels to traditional ornamental designs.",
+      "Each fence is built to withstand the elements while enhancing your property's security and visual appeal."
+    ],
+    subtypes: Array.from({ length: 10 }, (_, i) => ({
+      title: `Fence ${i + 1}`,
+      image: `/assets/collections/fences/fences${i + 1}.jpg`,
+    })),
+  },
+
+  gates: {
+    title: "Custom Gates",
+    hero: "/assets/services/gates.jpg",
+    description: [
+      "Make a bold entrance with our premium custom gates that merge security and design excellence.",
+      "Choose from swing, sliding, or automated gate systems—each fabricated to meet your structural and aesthetic preferences.",
+      "Built with top-grade steel, our gates add an elegant yet commanding presence to residential and commercial properties alike."
+    ],
+    subtypes: Array.from({ length: 12 }, (_, i) => ({
+      title: `Gate ${i + 1}`,
+      image: `/assets/collections/gates/gates${i + 1}.jpg`,
+    })),
+  },
+
+  shelves: {
+    title: "Custom Shelves",
+    hero: "/assets/services/shelves.jpg",
+    description: [
+      "Maximize your storage potential with durable, space-optimized shelving solutions built to last.",
+      "Perfect for homes, workshops, offices, and warehouses—crafted from heavy-duty steel to hold even the heaviest loads.",
+      "Each unit is customized to your layout, ensuring both functionality and a polished industrial look."
+    ],
+    subtypes: Array.from({ length: 6 }, (_, i) => ({
+      title: `Shelf ${i + 1}`,
+      image: `/assets/collections/shelves/shelves${i + 1}.jpg`,
+    })),
+  },
+
+  carmods: {
+    title: "Car Modifications & Accessories",
+    hero: "/assets/services/carmods.jpeg",
+    description: [
+      "Enhance your ride with expertly fabricated car modifications designed for performance, style, and endurance.",
+      "From custom bumpers and roll cages to unique exhaust designs, we turn your automotive ideas into steel reality.",
+      "Precision-crafted parts tailored to fit your vehicle’s specifications for maximum functionality and visual impact."
+    ],
+    subtypes: Array.from({ length: 14 }, (_, i) => ({
+      title: `Car Modification ${i + 1}`,
+      image: `/assets/collections/carmods/carmods${i + 1}.jpeg`,
+    })),
+  },
+
+  customfab: {
+    title: "Custom Fabrications",
+    hero: "/assets/services/customfabrication.jpeg",
+    description: [
+      "Bring your concepts to life with bespoke metal fabrication services tailored to your exact specifications.",
+      "From architectural features to industrial components, our expert team handles every cut, weld, and finish with precision.",
+      "Whether it’s a one-off prototype or a full-scale project, we guarantee craftsmanship that exceeds expectations."
+    ],
+    subtypes: Array.from({ length: 13 }, (_, i) => ({
+      title: `Custom Fabrication ${i + 1}`,
+      image: `/assets/collections/customfab/custom fabrication${i + 1}.jpeg`,
+    })),
+  },
+
+  machinery: {
+    title: "Machinery Fabrication & Repairs",
+    hero: "/assets/services/machinery.jpeg",
+    description: [
+      "We design, fabricate, and repair industrial machinery with a focus on performance, reliability, and precision.",
+      "Our skilled engineers restore worn or damaged components and manufacture new parts to exact tolerances.",
+      "From heavy-duty repairs to full custom builds, we keep your equipment running at peak efficiency."
+    ],
+    subtypes: Array.from({ length: 13 }, (_, i) => ({
+      title: `Machinery Fabrication & Repair ${i + 1}`,
+      image: `/assets/collections/machinery/machine fabrication and repairs${i + 1}.jpeg`,
+    })),
+  },
+
+  signages: {
+    title: "Custom Signage",
+    hero: "/assets/services/signage.jpeg",
+    description: [
+      "Make your brand stand out with striking, durable custom metal signage built to capture attention.",
+      "We design and fabricate signs for businesses, buildings, and events using precision laser cutting and professional finishes.",
+      "From bold logos to elegant nameplates, every piece is tailored to your identity and environment."
+    ],
+    subtypes: Array.from({ length: 8 }, (_, i) => ({
+      title: `Custom Signage ${i + 1}`,
+      image: `/assets/collections/signages/custom signange${i + 1}.jpeg`,
+    })),
+  },
+
+  staircase: {
+    title: "Staircases & Handrails",
+    hero: "/assets/services/staircase.jpeg",
+    description: [
+      "Elevate your space with beautifully engineered staircases and handrails that combine safety with sophistication.",
+      "Each design is crafted from premium steel and finished to enhance both residential and commercial interiors.",
+      "From sleek modern spirals to robust industrial steps, our custom builds define elegance in every ascent."
+    ],
+    subtypes: Array.from({ length: 11 }, (_, i) => ({
+      title: `Staircase and Handrails ${i + 1}`,
+      image: `/assets/collections/staircase/staircase and handrails${i + 1}.jpeg`,
+    })),
+  },
+};
+
 
       const CollectionPage = () => {
       const { collectionId } = useParams();
@@ -98,6 +175,8 @@ import { useState } from "react";
 
       return (
         <main className="bg-[#f5f5f5] min-h-screen">
+
+         <Navigation /> 
           {/* Hero Section */}
           <section className="relative w-full h-[350px] md:h-[450px] overflow-hidden">
             <img src={collection.hero} alt={collection.title} className="w-full h-full object-cover" />

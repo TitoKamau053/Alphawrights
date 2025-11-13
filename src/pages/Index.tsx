@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { Phone } from "lucide-react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { title } from "process";
 
 const logo = "/assets/homepagelogo.jpg";
 const heroVideo = "/assets/herovideo.mp4";
@@ -20,6 +21,11 @@ const enclosures = "/assets/services/enclosures.jpg";
 const fences = "/assets/services/fences.jpg";
 const gates = "/assets/services/gates.jpg";
 const shelves = "/assets/services/shelves.jpg";
+const carmods = "/assets/services/carmods.jpeg";
+const customfab = "/assets/services/customfabrication.jpeg";
+const machinery = "/assets/services/machinery.jpeg";
+const signage = "/assets/services/signage.jpeg";
+const staircase="/assets/services/staircase.jpeg";
 
 
 
@@ -263,50 +269,97 @@ const Index = () => {
 
       {/* Collection Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {[
-          {
-            title: "Carports and Working Shades",
-            image: carports,
-            link: "/collections/carports",
-            subtitle: "Load-considered shades",
-            description:
-              "Architectural carports & work shades — designed for form and function.",
-          },
-          {
-            title: "Doors",
-            image: doors,
-            link: "/collections/doors",
-            subtitle: "Secure, stylish entrances",
-            description: "Precision-built doors with clean, architectural lines.",
-          },
-          {
-            title: "Enclosures",
-            image: enclosures,
-            link: "/collections/enclosures",
-            subtitle: "Durable enclosures",
-            description: "Protective enclosures custom-fit for equipment and spaces.",
-          },
-          {
-            title: "Fences",
-            image: fences,
-            link: "/collections/fences",
-            subtitle: "Boundary solutions",
-            description: "Custom fencing that balances security and design.",
-          },
-          {
-            title: "Gates",
-            image: gates,
-            link: "/collections/gates",
-            subtitle: "Architectural gates",
-            description: "Gates crafted for presence, durability, and function.",
-          },
-          {
-            title: "Shelves",
-            image: shelves,
-            link: "/collections/shelves",
-            subtitle: "Storage & display",
-            description: "Heavy-duty shelving and refined storage solutions.",
-          },
+      {[
+        {
+          title: "Carports and Working Shades",
+          image: carports,
+          link: "/collections/carports",
+          subtitle: "Engineered for protection & performance",
+          description:
+            "Stylish steel shades designed to protect vehicles and outdoor workspaces.",
+        },
+        {
+          title: "Doors",
+          image: doors,
+          link: "/collections/doors",
+          subtitle: "Bold entrances built to last",
+          description:
+            "Custom steel doors blending security, precision, and timeless design.",
+        },
+        {
+          title: "Enclosures",
+          image: enclosures,
+          link: "/collections/enclosures",
+          subtitle: "Purpose-built steel protection",
+          description:
+            "Durable enclosures customized to safeguard spaces and equipment.",
+        },
+        {
+          title: "Fences",
+          image: fences,
+          link: "/collections/fences",
+          subtitle: "Strength that defines boundaries",
+          description:
+            "Tough, elegant fencing solutions for privacy and security.",
+        },
+        {
+          title: "Gates",
+          image: gates,
+          link: "/collections/gates",
+          subtitle: "Where security meets artistry",
+          description:
+            "Statement gates designed for durability, access, and style.",
+        },
+        {
+          title: "Shelves",
+          image: shelves,
+          link: "/collections/shelves",
+          subtitle: "Storage built for strength",
+          description:
+            "Heavy-duty shelves engineered for storage and organization.",
+        },
+        {
+          title: "Car Modifications",
+          image: carmods,
+          link: "/collections/carmods",
+          subtitle: "Performance meets personalization",
+          description:
+            "Custom car mods built for power, safety, and identity.",
+        },
+        {
+          title: "Custom Fabrications",
+          image: customfab,
+          link: "/collections/customfab",
+          subtitle: "Crafted from concept to creation",
+          description:
+            "Tailor-made metalworks combining creativity and precision.",
+        },
+        {
+          title: "Machinery Fabrication & Repairs",
+          image: machinery,
+          link: "/collections/machinery",
+          subtitle: "Precision-engineered performance",
+          description:
+            "Expert fabrication and repair for reliable machinery performance.",
+        },
+        {
+          title: "Custom Signage",
+          image: signage,
+          link: "/collections/signages",
+          subtitle: "Design that commands attention",
+          description:
+            "Durable metal signage built to define brands and spaces.",
+        },
+        {
+          title: "Staircases and Handrails",
+          image: staircase,
+          link: "/collections/staircase",
+          subtitle: "Functional elegance in every step",
+          description:
+            "Modern steel staircases and handrails with lasting appeal.",
+        },
+
+
         ].map((item, index) => (
           <Link
             key={index}
