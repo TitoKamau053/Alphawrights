@@ -26,6 +26,7 @@ const customfab = "/assets/services/customfabrication.jpeg";
 const machinery = "/assets/services/machinery.jpeg";
 const signage = "/assets/services/signage.jpeg";
 const staircase="/assets/services/staircase.jpeg";
+const coffeetable="/assets/services/furnishings/coffeetable.jpeg";
 
 
 
@@ -78,6 +79,142 @@ const Index = () => {
     },
   };
 
+
+const collectionGroups = {
+  metal: [
+    {
+      title: "Carports and Working Shades",
+      image: carports,
+      link: "/collections/metal/carports",
+      subtitle: "Engineered for protection & performance",
+      description: "Stylish steel shades designed to protect vehicles and outdoor workspaces.",
+    },
+    {
+      title: "Doors",
+      image: doors,
+      link: "/collections/metal/doors",
+      subtitle: "Bold entrances built to last",
+      description: "Custom steel doors blending security, precision, and timeless design.",
+    },
+    {
+      title: "Enclosures",
+      image: enclosures,
+      link: "/collections/metal/enclosures",
+      subtitle: "Purpose-built steel protection",
+      description: "Durable enclosures customized to safeguard spaces and equipment.",
+    },
+    {
+      title: "Fences",
+      image: fences,
+      link: "/collections/metal/fences",
+      subtitle: "Strength that defines boundaries",
+      description: "Tough, elegant fencing solutions for privacy and security.",
+    },
+    {
+      title: "Gates",
+      image: gates,
+      link: "/collections/metal/gates",
+      subtitle: "Where security meets artistry",
+      description: "Statement gates designed for durability, access, and style.",
+    },
+    {
+      title: "Shelves",
+      image: shelves,
+      link: "/collections/metal/shelves",
+      subtitle: "Storage built for strength",
+      description: "Heavy-duty shelves engineered for storage and organization.",
+    },
+    {
+      title: "Car Modifications",
+      image: carmods,
+      link: "/collections/metal/carmods",
+      subtitle: "Performance meets personalization",
+      description: "Custom car mods built for power, safety, and identity.",
+    },
+    {
+      title: "Custom Fabrications",
+      image: customfab,
+      link: "/collections/metal/customfab",
+      subtitle: "Crafted from concept to creation",
+      description: "Tailor-made metalworks combining creativity and precision.",
+    },
+    {
+      title: "Machinery Fabrication & Repairs",
+      image: machinery,
+      link: "/collections/metal/machinery",
+      subtitle: "Precision-engineered performance",
+      description: "Expert fabrication and repair for reliable machinery performance.",
+    },
+    {
+      title: "Custom Signage",
+      image: signage,
+      link: "/collections/metal/signages",
+      subtitle: "Design that commands attention",
+      description: "Durable metal signage built to define brands and spaces.",
+    },
+    {
+      title: "Staircases and Handrails",
+      image: staircase,
+      link: "/collections/metal/staircase",
+      subtitle: "Functional elegance in every step",
+      description: "Modern steel staircases and handrails with lasting appeal.",
+    },
+  ],
+
+  furnishings: [
+    {
+      title: "Coffee Tables",
+      image: coffeetable,
+      link: "/collections/furnishings/coffeetables",
+      subtitle: "Elegant centerpieces",
+      description: "Blend artistry and functionality to elevate your living space.",
+    },
+    // {
+    //   title: "Dining & Conference Tables",
+    //   image: "/assets/furnishings/dining.jpg",
+    //   link: "/collections/furnishings/dining",
+    //   subtitle: "Sophisticated surfaces",
+    //   description: "Designed for memorable meals and productive meetings alike.",
+    // },
+    // {
+    //   title: "Office Tables",
+    //   image: "/assets/furnishings/office.jpg",
+    //   link: "/collections/furnishings/office",
+    //   subtitle: "Stylish workstations",
+    //   description: "Durable tables that inspire focus and professionalism.",
+    // },
+    // {
+    //   title: "Outdoor Furniture",
+    //   image: "/assets/furnishings/outdoor.jpg",
+    //   link: "/collections/furnishings/outdoor",
+    //   subtitle: "Refined & weather-resistant",
+    //   description: "Transform outdoor spaces into luxurious retreats.",
+    // },
+    // {
+    //   title: "Shelves",
+    //   image: "/assets/furnishings/shelves.jpg",
+    //   link: "/collections/furnishings/shelves",
+    //   subtitle: "Functional storage",
+    //   description: "Chic shelving solutions that organize and showcase your style.",
+    // },
+    // {
+    //   title: "Beds & Seating",
+    //   image: "/assets/furnishings/beds.jpg",
+    //   link: "/collections/furnishings/beds",
+    //   subtitle: "Comfort meets craftsmanship",
+    //   description: "Designed for rest, relaxation, and elegance.",
+    // },
+    // {
+    //   title: "Custom Interior",
+    //   image: "/assets/furnishings/interior.jpg",
+    //   link: "/collections/furnishings/interior",
+    //   subtitle: "Tailor-made accent pieces",
+    //   description: "TV consoles and accents that reflect your unique vision.",
+    // },
+  ],
+};
+
+
   const location = useLocation();
 
   useEffect(() => {
@@ -104,6 +241,11 @@ const Index = () => {
   const active = services[activeTab];
   const { scrollY } = useScroll();
   const yTransform = useTransform(scrollY, [0, 300], [0, -50]);
+
+
+  const [activeGroup, setActiveGroup] = useState<keyof typeof collectionGroups>("metal");
+  const activeCollections = collectionGroups[activeGroup];
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -257,153 +399,79 @@ const Index = () => {
       </section>
       
 
-    {/* Collections Section */}
-    <section id="collections" className="py-20 px-6 md:px-12 bg-gray-100">
-      <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-[0.2em]">
-          Our Collections
-        </h2>
-        <p className="text-gray-600 mt-4">
-          Explore our crafted range — where steel and wood meet artistry.
-        </p>
-      </div>
+      {/* Collections Section */}
+      <section id="collections" className="py-20 px-6 md:px-12 bg-gray-100">
+        <div className="max-w-6xl mx-auto text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-[0.2em]">
+            Our Collections
+          </h2>
+          <p className="text-gray-600 mt-4">
+            Explore our crafted range — where steel and wood meet artistry.
+          </p>
+        </div>
 
-      {/* Collection Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-      {[
-        {
-          title: "Carports and Working Shades",
-          image: carports,
-          link: "/collections/carports",
-          subtitle: "Engineered for protection & performance",
-          description:
-            "Stylish steel shades designed to protect vehicles and outdoor workspaces.",
-        },
-        {
-          title: "Doors",
-          image: doors,
-          link: "/collections/doors",
-          subtitle: "Bold entrances built to last",
-          description:
-            "Custom steel doors blending security, precision, and timeless design.",
-        },
-        {
-          title: "Enclosures",
-          image: enclosures,
-          link: "/collections/enclosures",
-          subtitle: "Purpose-built steel protection",
-          description:
-            "Durable enclosures customized to safeguard spaces and equipment.",
-        },
-        {
-          title: "Fences",
-          image: fences,
-          link: "/collections/fences",
-          subtitle: "Strength that defines boundaries",
-          description:
-            "Tough, elegant fencing solutions for privacy and security.",
-        },
-        {
-          title: "Gates",
-          image: gates,
-          link: "/collections/gates",
-          subtitle: "Where security meets artistry",
-          description:
-            "Statement gates designed for durability, access, and style.",
-        },
-        {
-          title: "Shelves",
-          image: shelves,
-          link: "/collections/shelves",
-          subtitle: "Storage built for strength",
-          description:
-            "Heavy-duty shelves engineered for storage and organization.",
-        },
-        {
-          title: "Car Modifications",
-          image: carmods,
-          link: "/collections/carmods",
-          subtitle: "Performance meets personalization",
-          description:
-            "Custom car mods built for power, safety, and identity.",
-        },
-        {
-          title: "Custom Fabrications",
-          image: customfab,
-          link: "/collections/customfab",
-          subtitle: "Crafted from concept to creation",
-          description:
-            "Tailor-made metalworks combining creativity and precision.",
-        },
-        {
-          title: "Machinery Fabrication & Repairs",
-          image: machinery,
-          link: "/collections/machinery",
-          subtitle: "Precision-engineered performance",
-          description:
-            "Expert fabrication and repair for reliable machinery performance.",
-        },
-        {
-          title: "Custom Signage",
-          image: signage,
-          link: "/collections/signages",
-          subtitle: "Design that commands attention",
-          description:
-            "Durable metal signage built to define brands and spaces.",
-        },
-        {
-          title: "Staircases and Handrails",
-          image: staircase,
-          link: "/collections/staircase",
-          subtitle: "Functional elegance in every step",
-          description:
-            "Modern steel staircases and handrails with lasting appeal.",
-        },
-
-
-        ].map((item, index) => (
-          <Link
-            key={index}
-            to={item.link}
-            className="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer"
+        {/* Tabs */}
+        <div className="flex justify-center gap-6 mb-10 text-sm md:text-base uppercase tracking-wider font-semibold">
+          <button
+            onClick={() => setActiveGroup("metal")}
+            className={`pb-1 border-b-2 transition-all duration-300 ${
+              activeGroup === "metal"
+                ? "border-black text-black"
+                : "border-transparent text-gray-500 hover:text-black"
+            }`}
           >
-            <div className="relative w-full h-72">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-              />
+            Custom Metal Works
+          </button>
+          <button
+            onClick={() => setActiveGroup("furnishings")}
+            className={`pb-1 border-b-2 transition-all duration-300 ${
+              activeGroup === "furnishings"
+                ? "border-black text-black"
+                : "border-transparent text-gray-500 hover:text-black"
+            }`}
+          >
+            Custom Furnishings
+          </button>
+        </div>
 
-              {/* subtle overlay */}
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300" />
-
-              {/* centered content */}
-              <div className="absolute inset-0 flex items-center justify-center p-6">
-                <div className="text-white text-center max-w-xl">
-                  {item.subtitle && (
-                    <p className="text-xs tracking-widest uppercase mb-4 opacity-90">
-                      {item.subtitle}
-                    </p>
-                  )}
-
-                  <h3 className="text-2xl md:text-3xl font-black uppercase tracking-[0.12em] mb-3">
-                    {item.title}
-                  </h3>
-
-                  {item.description && (
-                    <p className="text-sm text-white/90 mb-6">{item.description}</p>
-                  )}
-
-                  <div className="inline-block bg-white text-black px-6 py-2 text-sm font-semibold uppercase rounded">
-                    View Collection
+        {/* Collection Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {activeCollections.map((item, index) => (
+            <Link
+              key={index}
+              to={item.link}
+              className="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer"
+            >
+              <div className="relative w-full h-72">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300" />
+                <div className="absolute inset-0 flex items-center justify-center p-6">
+                  <div className="text-white text-center max-w-xl">
+                    {item.subtitle && (
+                      <p className="text-xs tracking-widest uppercase mb-4 opacity-90">
+                        {item.subtitle}
+                      </p>
+                    )}
+                    <h3 className="text-2xl md:text-3xl font-black uppercase tracking-[0.12em] mb-3">
+                      {item.title}
+                    </h3>
+                    {item.description && (
+                      <p className="text-sm text-white/90 mb-6">{item.description}</p>
+                    )}
+                    <div className="inline-block bg-white text-black px-6 py-2 text-sm font-semibold uppercase rounded">
+                      View Collection
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
+            </Link>
+          ))}
+        </div>
+      </section>
 
 
       {/* Why Choose Us */}
