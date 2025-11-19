@@ -79,6 +79,18 @@ const Index = () => {
     },
   };
 
+  const [galleryData, setGalleryData] = useState<any[]>([]);
+  useEffect(() => {
+    fetch("/nested-gallery.json")
+      .then((res) => res.json())
+      .then((data) => setGalleryData(data));
+  }, []);
+
+
+  const getCoverImage = (category: string) => {
+  const entry = galleryData.find((c) => c.category === category);
+  return entry?.cover || "";
+  };
 
 const collectionGroups = {
   metal: [
@@ -169,48 +181,27 @@ const collectionGroups = {
       subtitle: "Elegant centerpieces",
       description: "Blend artistry and functionality to elevate your living space.",
     },
-    // {
-    //   title: "Dining & Conference Tables",
-    //   image: "/assets/furnishings/dining.jpg",
-    //   link: "/collections/furnishings/dining",
-    //   subtitle: "Sophisticated surfaces",
-    //   description: "Designed for memorable meals and productive meetings alike.",
-    // },
-    // {
-    //   title: "Office Tables",
-    //   image: "/assets/furnishings/office.jpg",
-    //   link: "/collections/furnishings/office",
-    //   subtitle: "Stylish workstations",
-    //   description: "Durable tables that inspire focus and professionalism.",
-    // },
-    // {
-    //   title: "Outdoor Furniture",
-    //   image: "/assets/furnishings/outdoor.jpg",
-    //   link: "/collections/furnishings/outdoor",
-    //   subtitle: "Refined & weather-resistant",
-    //   description: "Transform outdoor spaces into luxurious retreats.",
-    // },
-    // {
-    //   title: "Shelves",
-    //   image: "/assets/furnishings/shelves.jpg",
-    //   link: "/collections/furnishings/shelves",
-    //   subtitle: "Functional storage",
-    //   description: "Chic shelving solutions that organize and showcase your style.",
-    // },
-    // {
-    //   title: "Beds & Seating",
-    //   image: "/assets/furnishings/beds.jpg",
-    //   link: "/collections/furnishings/beds",
-    //   subtitle: "Comfort meets craftsmanship",
-    //   description: "Designed for rest, relaxation, and elegance.",
-    // },
-    // {
-    //   title: "Custom Interior",
-    //   image: "/assets/furnishings/interior.jpg",
-    //   link: "/collections/furnishings/interior",
-    //   subtitle: "Tailor-made accent pieces",
-    //   description: "TV consoles and accents that reflect your unique vision.",
-    // },
+    {
+      title: "Dining & Conference Tables",
+      image: getCoverImage("Furnitures/Dining Tables"),
+      link: "/collections/furnishings/diningTables",
+      subtitle: "Sophisticated surfaces",
+      description: "Designed for memorable meals and productive meetings alike.",
+    },
+    {
+      title: "Office Desks",
+      image: getCoverImage("Furnitures/Office Desks"),
+      link: "/collections/furnishings/officeTables",
+      subtitle: "Stylish workstations",
+      description: "Durable tables that inspire focus and professionalism.",
+    },
+    {
+      title: "Work Tables",
+      image: getCoverImage("Furnitures/Work Tables"),
+      link: "/collections/furnishings/outdoorFurniture",
+      subtitle: "Refined & weather-resistant",
+      description: "Transform outdoor spaces into luxurious retreats.",
+    },
   ],
 };
 

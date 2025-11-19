@@ -1,11 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import Navigation from "@/components/Navigation";
+import { useEffect, useState } from "react";
 
+const CollectionPage = () => {
+
+const [galleryData, setGalleryData] = useState<any[]>([]);
+
+useEffect(() => {
+  fetch("/nested-gallery.json")
+    .then((res) => res.json())
+    .then((data) => setGalleryData(data));
+}, []);
+
+const getImagesByCategory = (category: string) => {
+const entry = galleryData.find((c) => c.category === category);
+  return entry?.images.map((img, i) => ({
+    title: `${category.split("/").pop()} ${i + 1}`,
+    image: img.src,
+  })) || [];
+};
+
+  const getCoverImage = (category: string) => {
+  const entry = galleryData.find((c) => c.category === category);
+  return entry?.cover || "";
+  };
 
 const collections = {
+
+  
   metal: {
     title: "Custom Metal Works",
     items: {
@@ -190,103 +214,54 @@ const collections = {
           })),
         },
 
-        // diningTables: {
-        //   title: "Dining & Conference Tables",
-        //   hero: "/assets/furnishings/dining.jpg",
-        //   description: [
-        //     "Sophisticated surfaces designed for memorable meals and productive meetings alike.",
-        //     "Built to balance durability, elegance, and functionality."
-        //   ],
-        //   subtypes: Array.from({ length: 6 }, (_, i) => ({
-        //     title: `Dining Table ${i + 1}`,
-        //     image: `/assets/collections/furnishings/dining${i + 1}.jpg`,
-        //   })),
-        // },
+        diningTables: {
+          title: "Dining & Conference Tables",
+          hero: getCoverImage("Furnitures/Dining Tables"),
+          description: [
+            "Sophisticated surfaces designed for memorable meals and productive meetings alike.",
+            "Built to balance durability, elegance, and functionality."
+          ],
+          subtypes: getImagesByCategory("Furnitures/Dining Tables"),
+        },
 
-        // officeTables: {
-        //   title: "Office Tables",
-        //   hero: "/assets/furnishings/office.jpg",
-        //   description: [
-        //     "Stylish, durable workstations that inspire focus and professionalism.",
-        //     "Designed to fit seamlessly into modern workspaces."
-        //   ],
-        //   subtypes: Array.from({ length: 6 }, (_, i) => ({
-        //     title: `Office Table ${i + 1}`,
-        //     image: `/assets/collections/furnishings/office${i + 1}.jpg`,
-        //   })),
-        // },
+        officeTables: {
+          title: "Office Desks",
+          hero: getCoverImage("Furnitures/Office Desks"),
+          description: [
+            "Stylish, durable workstations that inspire focus and professionalism.",
+            "Designed to fit seamlessly into modern workspaces."
+          ],
+          subtypes: getImagesByCategory("Furnitures/Office Desks"),
+        },
 
-        // outdoorFurniture: {
-        //   title: "Outdoor Furniture",
-        //   hero: "/assets/furnishings/outdoor.jpg",
-        //   description: [
-        //     "Refined, weather-resistant pieces for patios and gardens.",
-        //     "Transform outdoor spaces into luxurious retreats."
-        //   ],
-        //   subtypes: Array.from({ length: 6 }, (_, i) => ({
-        //     title: `Outdoor Furniture ${i + 1}`,
-        //     image: `/assets/collections/furnishings/outdoor${i + 1}.jpg`,
-        //   })),
-        // },
+        outdoorFurniture: {
+          title: "Outdoor Furniture",
+          hero: getCoverImage("Furnitures/Work Tables"),
+          description: [
+            "Refined, weather-resistant pieces for patios and gardens.",
+            "Transform outdoor spaces into luxurious retreats."
+          ],
+          subtypes: getImagesByCategory("Furnitures/Outdoor Furniture"),
+        },
 
-        // shelves: {
-        //   title: "Shelves",
-        //   hero: "/assets/furnishings/shelves.jpg",
-        //   description: [
-        //     "Functional yet chic storage solutions.",
-        //     "Showcase your style while organizing your space."
-        //   ],
-        //   subtypes: Array.from({ length: 6 }, (_, i) => ({
-        //     title: `Furnishing Shelf ${i + 1}`,
-        //     image: `/assets/collections/furnishings/shelves${i + 1}.jpg`,
-        //   })),
-        // },
-
-        // bedsSeating: {
-        //   title: "Beds & Seating",
-        //   hero: "/assets/furnishings/beds.jpg",
-        //   description: [
-        //     "Comfort meets craftsmanship in beds and seating.",
-        //     "Designed for rest, relaxation, and elegance."
-        //   ],
-        //   subtypes: Array.from({ length: 6 }, (_, i) => ({
-        //     title: `Bed/Seating ${i + 1}`,
-        //     image: `/assets/collections/furnishings/beds${i + 1}.jpg`,
-        //   })),
-        // },
-
-        // customInterior: {
-        //   title: "Custom Interior (TV Consoles & Accent Pieces)",
-        //   hero: "/assets/furnishings/interior.jpg",
-        //   description: [
-        //     "Tailor-made pieces that reflect your unique vision.",
-        //     "Elevate your home’s interior with bespoke design."
-        //   ],
-        //   subtypes: Array.from({ length: 6 }, (_, i) => ({
-        //     title: `Interior Piece ${i + 1}`,
-        //     image: `/assets/collections/furnishings/interior${i + 1}.jpg`,
-        //   })),
-        // },
       },
     },
-  };
+};
+const { group, collectionId } = useParams();
+const normalizedId = Object.keys(collections[group]?.items || {}).find(
+  key => key.toLowerCase() === (collectionId || "").toLowerCase()
+);
 
+const collection = collections[group]?.items[normalizedId];
 
-      const CollectionPage = () => {
-      const { group, collectionId } = useParams();
-      const normalizedId = Object.keys(collections[group]?.items || {}).find(
-        key => key.toLowerCase() === (collectionId || "").toLowerCase()
-      );
+const [activeSubtype, setActiveSubtype] = useState(null);
 
-      const collection = collections[group]?.items[normalizedId];
+     
 
-      const [activeSubtype, setActiveSubtype] = useState(null);
-
-
-      if (!collection) {
+if (!collection) {
         return <div className="p-10 text-center text-gray-600">Collection not found.</div>;
-      }
-      return (
+}
+return (
         <main className="bg-[#f5f5f5] min-h-screen">
 
          <Navigation /> 
@@ -435,7 +410,6 @@ const collections = {
             </>
           )}
         </main>
-      );
-    };
+);};
 
-    export default CollectionPage;
+export default CollectionPage;
