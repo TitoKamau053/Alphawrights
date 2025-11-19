@@ -31,6 +31,7 @@ const bed="/assets/services/furnishings/bed.jpeg";
 const furniture="/assets/services/furnishings/furniture.jpeg";
 const officedesk="/assets/services/furnishings/officedesk.jpeg";
 const homeshelf="/assets/services/furnishings/homeshelf.jpeg";
+const dinning="/assets/services/furnishings/dinning.jpeg";
 
 
 
@@ -199,6 +200,15 @@ const collectionGroups = {
       subtitle: "Living beyond walls",
       description: "Crafted to withstand the elements, these pieces bring warmth and sophistication to your outdoor gatherings.",
     },
+
+    {
+      title: "Dining & Conference Tables",
+      image: dinning,
+      link: "/collections/furnishings/dinning",
+      subtitle: "Gather in style",
+      description: "Elegant tables designed to bring people together for meals and meetings alike.",
+    },
+
     {
       title: "Home Shelves",
       image: homeshelf,

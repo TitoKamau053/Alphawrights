@@ -118,7 +118,7 @@ const collections = {
           "From architectural features to industrial components, our expert team handles every cut, weld, and finish with precision.",
           "Whether it’s a one-off prototype or a full-scale project, we guarantee craftsmanship that exceeds expectations."
         ],
-        subtypes: Array.from({ length: 17 }, (_, i) => {
+        subtypes: Array.from({ length: 19 }, (_, i) => {
           const descriptions = {
             14: "Custom aircraft access platforms built for precision and reliability.",
             15: "Unique functional builds designed to solve challenges others can’t.",
@@ -188,7 +188,7 @@ const collections = {
           "A coffee table is more than a surface — it’s the quiet stage where daily life unfolds. From morning rituals to evening gatherings, each piece is shaped to invite connection while holding its own as a sculptural presence.",
           "Steel and wood combine to create a centerpiece that feels enduring yet welcoming, grounding your space with character and ease."
         ],
-        subtypes: Array.from({ length: 13 }, (_, i) => ({
+        subtypes: Array.from({ length: 14 }, (_, i) => ({
           title: `Coffee Table ${i + 1}`,
           image: `/assets/collections/furnishings/coffeetables/coffeetable${i + 1}.jpeg`,
         })),
@@ -202,7 +202,7 @@ const collections = {
           "A desk should do more than hold your work — it should shape the way you move through it. Our designs balance clarity with resilience, offering a foundation that supports long hours without losing a sense of calm.",
           "Every detail is considered, from the strength of steel to the warmth of wood, creating a workspace that feels intentional and enduring."
         ],
-        subtypes: Array.from({ length: 17 }, (_, i) => ({
+        subtypes: Array.from({ length: 19 }, (_, i) => ({
           title: `Office Desk ${i + 1}`,
           image: `/assets/collections/furnishings/officedesks/officedesk${i + 1}.jpeg`,
         })),
@@ -221,6 +221,21 @@ const collections = {
           image: `/assets/collections/furnishings/beds/bed${i + 1}.jpeg`,
         })),
       },
+
+      dinning: {
+        title: "Dining / Conference",
+        hero: "/assets/services/furnishings/dinning.jpeg",
+        subtitle: "Gatherings with intention",
+        description: [
+          "Our dining and conference tables are designed to be more than functional surfaces — they become the setting where ideas are exchanged, meals are shared, and decisions take shape. Each piece carries a quiet strength, balancing refined proportions with the resilience of steel and wood.",
+          "Whether for intimate dinners or professional meetings, these tables create a sense of presence and purpose. Their craftsmanship ensures durability, while their design invites connection, making every gathering feel grounded and memorable."
+        ],
+        subtypes: Array.from({ length: 15 }, (_, i) => ({
+          title: `Dining Table ${i + 1}`,
+          image: `/assets/collections/furnishings/dinning/dinning${i + 1}.jpeg`,
+        })),
+      },
+
 
       outdoorfurniture: {
         title: "Outdoor Furniture",
