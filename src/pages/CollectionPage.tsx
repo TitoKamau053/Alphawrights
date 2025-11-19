@@ -6,27 +6,6 @@ import { useEffect, useState } from "react";
 
 const CollectionPage = () => {
 
-const [galleryData, setGalleryData] = useState<any[]>([]);
-
-useEffect(() => {
-  fetch("/nested-gallery.json")
-    .then((res) => res.json())
-    .then((data) => setGalleryData(data));
-}, []);
-
-const getImagesByCategory = (category: string) => {
-const entry = galleryData.find((c) => c.category === category);
-  return entry?.images.map((img, i) => ({
-    title: `${category.split("/").pop()} ${i + 1}`,
-    image: img.src,
-  })) || [];
-};
-
-  const getCoverImage = (category: string) => {
-  const entry = galleryData.find((c) => c.category === category);
-  return entry?.cover || "";
-  };
-
 const collections = {
 
   
@@ -199,53 +178,80 @@ const collections = {
   },
 
   furnishings: {
-      title: "Custom Furnishings — Steel & Wood",
-      items: {
-        coffeeTables: {
-          title: "Coffee Tables",
-          hero: "/assets/services/furnishings/coffeetable.jpeg",
-          description: [
-            "Elegant centerpieces that blend artistry and functionality.",
-            "Crafted to elevate your living space with strength and style."
-          ],
-          subtypes: Array.from({ length: 17 }, (_, i) => ({
-            title: `Coffee Table ${i + 1}`,
-            image: `/assets/collections/furnishings/coffeetable/coffeetable${i + 1}.jpeg`,
-          })),
-        },
-
-        diningTables: {
-          title: "Dining & Conference Tables",
-          hero: getCoverImage("Furnitures/Dining Tables"),
-          description: [
-            "Sophisticated surfaces designed for memorable meals and productive meetings alike.",
-            "Built to balance durability, elegance, and functionality."
-          ],
-          subtypes: getImagesByCategory("Furnitures/Dining Tables"),
-        },
-
-        officeTables: {
-          title: "Office Desks",
-          hero: getCoverImage("Furnitures/Office Desks"),
-          description: [
-            "Stylish, durable workstations that inspire focus and professionalism.",
-            "Designed to fit seamlessly into modern workspaces."
-          ],
-          subtypes: getImagesByCategory("Furnitures/Office Desks"),
-        },
-
-        outdoorFurniture: {
-          title: "Outdoor Furniture",
-          hero: getCoverImage("Furnitures/Work Tables"),
-          description: [
-            "Refined, weather-resistant pieces for patios and gardens.",
-            "Transform outdoor spaces into luxurious retreats."
-          ],
-          subtypes: getImagesByCategory("Furnitures/Outdoor Furniture"),
-        },
-
+    title: "Custom Furnishings — Steel & Wood",
+    items: {
+      coffeeTables: {
+        title: "Coffee Tables",
+        hero: "/assets/services/furnishings/coffeetable.jpeg",
+        subtitle: "The heart of your living room",
+        description: [
+          "A coffee table is more than a surface — it’s the quiet stage where daily life unfolds. From morning rituals to evening gatherings, each piece is shaped to invite connection while holding its own as a sculptural presence.",
+          "Steel and wood combine to create a centerpiece that feels enduring yet welcoming, grounding your space with character and ease."
+        ],
+        subtypes: Array.from({ length: 13 }, (_, i) => ({
+          title: `Coffee Table ${i + 1}`,
+          image: `/assets/collections/furnishings/coffeetables/coffeetable${i + 1}.jpeg`,
+        })),
       },
-    },
+
+      officeDesks: {
+        title: "Office Desks",
+        hero: "/assets/services/furnishings/officedesk.jpeg",
+        subtitle: "Workspaces with purpose",
+        description: [
+          "A desk should do more than hold your work — it should shape the way you move through it. Our designs balance clarity with resilience, offering a foundation that supports long hours without losing a sense of calm.",
+          "Every detail is considered, from the strength of steel to the warmth of wood, creating a workspace that feels intentional and enduring."
+        ],
+        subtypes: Array.from({ length: 17 }, (_, i) => ({
+          title: `Office Desk ${i + 1}`,
+          image: `/assets/collections/furnishings/officedesks/officedesk${i + 1}.jpeg`,
+        })),
+      },
+
+      beds: {
+        title: "Beds",
+        hero: "/assets/services/furnishings/bed.jpeg",
+        subtitle: "Sanctuaries of rest",
+        description: [
+          "A bed is the anchor of a room — a place where strength meets softness. Our frames are built to last, yet they carry a quiet elegance that turns rest into ritual and sleep into sanctuary.",
+          "Steel and wood form the backbone, while the design invites stillness, offering a retreat that feels both grounded and restorative."
+        ],
+        subtypes: Array.from({ length: 10 }, (_, i) => ({
+          title: `Bed ${i + 1}`,
+          image: `/assets/collections/furnishings/beds/bed${i + 1}.jpeg`,
+        })),
+      },
+
+      outdoorfurniture: {
+        title: "Outdoor Furniture",
+        hero: "/assets/services/furnishings/furniture.jpeg",
+        subtitle: "Living beyond walls",
+        description: [
+          "Outdoors, furniture must do more than endure — it must invite. Our pieces are forged to withstand the elements while carrying a warmth that makes patios and gardens feel like extensions of home.",
+          "Steel and wood are shaped into forms that encourage gathering, conversation, and ease, creating spaces where evenings stretch effortlessly into night."
+        ],
+        subtypes: Array.from({ length: 16 }, (_, i) => ({
+          title: `Outdoor Furniture ${i + 1}`,
+          image: `/assets/collections/furnishings/outdoorfurniture/furniture${i + 1}.jpeg`,
+        })),
+      },
+
+      homeShelves: {
+        title: "Home Shelves",
+        hero: "/assets/services/furnishings/homeshelf.jpeg",
+        subtitle: "Display with harmony",
+        description: [
+          "Shelves are not just storage — they are frames for the stories you choose to share. Our designs bring balance to a room, offering structure without rigidity and presence without distraction.",
+          "Crafted from steel and wood, they merge durability with elegance, allowing your collections to breathe while your space remains harmonious and refined."
+        ],
+        subtypes: Array.from({ length: 9 }, (_, i) => ({
+          title: `Home Shelf ${i + 1}`,
+          image: `/assets/collections/furnishings/homeshelves/shelf${i + 1}.jpeg`,
+        })),
+      }
+    }
+  }
+
 };
 const { group, collectionId } = useParams();
 const normalizedId = Object.keys(collections[group]?.items || {}).find(

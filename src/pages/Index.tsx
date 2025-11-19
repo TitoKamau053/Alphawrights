@@ -27,6 +27,15 @@ const machinery = "/assets/services/machinery.jpeg";
 const signage = "/assets/services/signage.jpeg";
 const staircase="/assets/services/staircase.jpeg";
 const coffeetable="/assets/services/furnishings/coffeetable.jpeg";
+const bed="/assets/services/furnishings/bed.jpeg";
+const furniture="/assets/services/furnishings/furniture.jpeg";
+const officedesk="/assets/services/furnishings/officedesk.jpeg";
+const homeshelf="/assets/services/furnishings/homeshelf.jpeg";
+
+
+
+
+
 
 
 
@@ -79,18 +88,6 @@ const Index = () => {
     },
   };
 
-  const [galleryData, setGalleryData] = useState<any[]>([]);
-  useEffect(() => {
-    fetch("/nested-gallery.json")
-      .then((res) => res.json())
-      .then((data) => setGalleryData(data));
-  }, []);
-
-
-  const getCoverImage = (category: string) => {
-  const entry = galleryData.find((c) => c.category === category);
-  return entry?.cover || "";
-  };
 
 const collectionGroups = {
   metal: [
@@ -178,29 +175,36 @@ const collectionGroups = {
       title: "Coffee Tables",
       image: coffeetable,
       link: "/collections/furnishings/coffeetables",
-      subtitle: "Elegant centerpieces",
-      description: "Blend artistry and functionality to elevate your living space.",
-    },
-    {
-      title: "Dining & Conference Tables",
-      image: getCoverImage("Furnitures/Dining Tables"),
-      link: "/collections/furnishings/diningTables",
-      subtitle: "Sophisticated surfaces",
-      description: "Designed for memorable meals and productive meetings alike.",
+      subtitle: "The heart of your living room",
+      description: "Designed as the heart of your living room, our coffee tables balance sculptural beauty with everyday utility.",
     },
     {
       title: "Office Desks",
-      image: getCoverImage("Furnitures/Office Desks"),
-      link: "/collections/furnishings/officeTables",
-      subtitle: "Stylish workstations",
-      description: "Durable tables that inspire focus and professionalism.",
+      image: officedesk,
+      link: "/collections/furnishings/officedesks",
+      subtitle: "Workspaces with purpose",
+      description: "Built for focus and flow, these desks merge clean lines with durable craftsmanship to inspire productivity.",
     },
     {
-      title: "Work Tables",
-      image: getCoverImage("Furnitures/Work Tables"),
-      link: "/collections/furnishings/outdoorFurniture",
-      subtitle: "Refined & weather-resistant",
-      description: "Transform outdoor spaces into luxurious retreats.",
+      title: "Beds",
+      image: bed,
+      link: "/collections/furnishings/beds",
+      subtitle: "Sanctuaries of rest",
+      description: "Where comfort meets design — our beds create a sanctuary of rest, blending strength with timeless elegance.",
+    },
+    {
+      title: "Outdoor Furniture",
+      image: furniture,
+      link: "/collections/furnishings/outdoorfurniture",
+      subtitle: "Living beyond walls",
+      description: "Crafted to withstand the elements, these pieces bring warmth and sophistication to your outdoor gatherings.",
+    },
+    {
+      title: "Home Shelves",
+      image: homeshelf,
+      link: "/collections/furnishings/homeshelves",
+      subtitle: "Display with harmony",
+      description: "Functional yet expressive, our shelving solutions showcase your treasures while enhancing spatial harmony.",
     },
   ],
 };
