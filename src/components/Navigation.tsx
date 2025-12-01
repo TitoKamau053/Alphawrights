@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation,useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 const logo = "/assets/homepagelogo.jpg";
@@ -7,6 +7,7 @@ const logo = "/assets/homepagelogo.jpg";
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
     { name: "Home", path: "/", hash: null },
@@ -24,6 +25,17 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
           <img src={logo} alt="Alpha Wrights Logo" className="h-10 w-auto transition-transform duration-300 group-hover:scale-105" />
+          {location.pathname !== "/" && (
+            <button
+              onClick={() => navigate(-1)}
+              className="hidden md:flex items-center gap-2 text-sm font-medium tracking-wide transition-colors hover:text-accent ml-6"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back
+            </button>
+          )}
           <span className="text-xl font-bold tracking-tight">Alpha Wrights</span>
         </Link>
 
@@ -74,6 +86,20 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-4 border-t border-border pt-4">
+            {location.pathname !== "/" && (
+              <button
+                onClick={() => {
+                  navigate(-1);
+                  setIsOpen(false);
+                }}
+                className="flex items-center gap-2 text-sm font-medium tracking-wide transition-colors hover:text-accent"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back
+              </button>
+            )}
             {navItems.map((item) => (
               item.download ? (
                 <a
