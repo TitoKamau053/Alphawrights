@@ -90,7 +90,7 @@ const collections = {
           "Perfect for homes, workshops, offices, and warehouses—crafted from heavy-duty steel to hold even the heaviest loads.",
           "Each unit is customized to your layout, ensuring both functionality and a polished industrial look."
         ],
-        subtypes: Array.from({ length: 6 }, (_, i) => ({
+        subtypes: Array.from({ length: 5 }, (_, i) => ({
           title: `Shelf ${i + 1}`,
           image: `/assets/collections/shelves/shelves${i + 1}.jpg`,
         })),
@@ -259,7 +259,7 @@ const collections = {
           "Shelves are not just storage — they are frames for the stories you choose to share. Our designs bring balance to a room, offering structure without rigidity and presence without distraction.",
           "Crafted from steel and wood, they merge durability with elegance, allowing your collections to breathe while your space remains harmonious and refined."
         ],
-        subtypes: Array.from({ length: 9 }, (_, i) => ({
+        subtypes: Array.from({ length: 8 }, (_, i) => ({
           title: `Home Shelf ${i + 1}`,
           image: `/assets/collections/furnishings/homeshelves/shelf${i + 1}.jpeg`,
         })),

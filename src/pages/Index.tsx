@@ -37,11 +37,6 @@ const dinning="/assets/services/furnishings/dinning.jpeg";
 
 
 
-
-
-
-
-
 const Index = () => {
   // Define services
   const services = {
@@ -128,7 +123,7 @@ const collectionGroups = {
       description: "Statement gates designed for durability, access, and style.",
     },
     {
-      title: "Shelves",
+      title: "Industrial Shelves",
       image: shelves,
       link: "/collections/metal/shelves",
       subtitle: "Storage built for strength",
@@ -246,6 +241,15 @@ const collectionGroups = {
   const active = services[activeTab];
   const { scrollY } = useScroll();
   const yTransform = useTransform(scrollY, [0, 300], [0, -50]);
+
+    // Sync collection tab with service tab
+  useEffect(() => {
+    if (activeTab === "steel") {
+      setActiveGroup("metal");
+    } else if (activeTab === "wood") {
+      setActiveGroup("furnishings");
+    }
+  }, [activeTab]);
 
 
   const [activeGroup, setActiveGroup] = useState<keyof typeof collectionGroups>("metal");
@@ -480,8 +484,8 @@ const collectionGroups = {
 
 
       {/* Why Choose Us */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
+      <section className="py-20 px-4"> 
+        <div className="container mx-auto max-w-6xl"> 
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl tracking-[0.2em] uppercase font-bold mb-4">
               Why Choose Alpha Wrights
@@ -489,36 +493,42 @@ const collectionGroups = {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-8 border-2 border-black">
+
+            {/* Box 1 — Soft Sand Beige */}
+            <div className="text-center p-8 border-2 border-black bg-[#E8DCC2]">
               <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">
-                Custom-Built
+                Built Just for you
               </h3>
-              <p className="text-gray-700">
-                Every project is tailored to your specific requirements. We
-                don't do cookie-cutter solutions.
+              <p className="text-gray-800">
+                Made to fit your style,
+                space, and needs perfectly.
               </p>
             </div>
 
-            <div className="text-center p-8 border-2 border-black">
+            {/* Box 2 — Cool Slate Blue */}
+            <div className="text-center p-8 border-2 border-black bg-[#5A6B80] text-white">
               <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">
-                Quality Craftsmanship
+                Guidance from Start to Finish
               </h3>
-              <p className="text-gray-700">
-                Our skilled artisans bring years of experience and dedication to
-                every piece we create.
+              <p>
+                We support you through every step, 
+                from ideas to final installation
               </p>
             </div>
 
-            <div className="text-center p-8 border-2 border-black">
+            {/* Box 3 — Muted Olive Green */}
+            <div className="text-center p-8 border-2 border-black bg-[#6F7755] text-white">
               <h3 className="text-xl font-bold uppercase mb-4 tracking-wider">
-                Consultation First
+                Craftsmanship You Can Trust
               </h3>
-              <p className="text-gray-700">
-                We work closely with you from concept to completion, ensuring
-                your vision becomes reality.
+              <p>
+                Strong, clean, and detailed 
+                work that lasts for years.
               </p>
             </div>
+
           </div>
+
         </div>
       </section>
 
